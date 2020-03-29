@@ -1,0 +1,40 @@
+states = {S,         
+          5th_zero,
+          4th_any,
+          3rd_any,
+          2nd_zero,
+          1st_any,
+          anything,
+          acc}      
+
+input_alphabet = {0,1}
+
+// no last bit when we start
+start_state =    anything
+
+// accept if last three bits were not 000
+accept_states =  {acc}
+
+delta =
+    // Starts with anything
+    anything, 1    -> anything;
+    anything, 0    -> anything;
+    
+    // x[|x|] = 1
+    anything, 1     -> acc;
+    
+    // x[|x| − 5] = x[|x| − 2] = 0
+    anything, 0     -> 5th_zero;
+    5th_zero, 0     -> 4th_any;
+    5th_zero, 1     -> 4th_any;
+    
+    4th_any, 0 -> 3rd_any;
+    4th_any, 1 -> 3rd_any;
+    
+    3rd_any, 0 -> 2nd_zero;
+    
+    2nd_zero, 0 -> 1st_any;
+    2nd_zero, 1 -> 1st_any;
+    
+    1st_any, 0 -> acc;
+    1st_any, 1 -> acc;
