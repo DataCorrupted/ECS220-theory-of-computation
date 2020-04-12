@@ -32,7 +32,7 @@ To proof that $\QuasiP$ is closed under composition, is to proof:
     $$\forall s, t, \exists k \Rightarrow f_s(f_t(n)) = \Theta(f_k(n))$$
 \begin{proof}
     Let's start with $f_s(f_t(n))$.
-    $$f_s(f_t(n)) = 2^{\Theta(\log^s 2^{\Theta(\log^t n)})} = 2^{\Theta(\Theta(\log^ n)^s)} = s^{\Theta(\log^{st} n)}$$
+    $$f_s(f_t(n)) = 2^{\Theta(\log^s 2^{\Theta(\log^t n)})} = 2^{\Theta(\Theta(\log^ n)^s)} = 2^{\Theta(\log^{st} n)}$$
 
     As long as we set $k = st$, we can easily have:
     $$\lim_{n \to \infty} \frac{f_s(f_t(n))}{f_k(n)} \in (0, \infty) \Leftrightarrow f_s(f_t(n)) = \Theta(f_k(n))$$
