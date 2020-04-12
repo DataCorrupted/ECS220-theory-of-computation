@@ -12,25 +12,26 @@
 
     The idea of the solution is here: for every subset $S$ of vertices, check whether there is a path that visits each node in $S$ exactly once and ends at a vertex $v$. Do this for all $v \in S$. If it exists, $v$ can be added to subset $S$ and we can say that $S$ has a Hamiltonian path. We can loop this action until we expand $S$ to contain all vertices in the graph, and we have our answer to the Hamiltonian Path decision problem. 
     
-    We use bitmasking to represent subsets, so our algorithm is as algorithm \ref{code:dp}.
+    We use bitmasking to represent subsets, so our algorithm is as algorithm \ref{code:dp}. Adjacency matrix $A$ is required.
     
     \begin{algorithm}
     	\caption{Hamiltonian Path decision problem} 
     	\label{code:dp}
-    	\begin{algorithmic}[1]
-    	\FOR {i = 0 to $2^n$}
+        \begin{algorithmic}[1]
+        \REQUIRE {A[ ][ ]}
+    	\FOR {i = 0 to $2^n-1$}
         	\FOR {j = 0 to n}
         	    \STATE {dp[j][i] = false}
         	\ENDFOR
     	\ENDFOR
-    	\FOR {i = 0 to n}
+    	\FOR {i = 0 to n-1}
     	    \STATE {dp[i][$2^i$] = true}
     	\ENDFOR
-    	\FOR {i = 0 to $2^n$}
-    	    \FOR {j = 0 to n}
+    	\FOR {i = 0 to $2^n-1$}
+    	    \FOR {j = 0 to n-1}
     	        \IF {$j^{th}$ bit is set in i}
-    	            \FOR {k = 0 to n}
-    	                \IF {j != k and $k^{th}$ bit is set in i and adj[k][j] == true}
+    	            \FOR {k = 0 to n-1}
+    	                \IF {j != k and $k^{th}$ bit is set in i and A[k][j] == true}
     	                    \IF {dp[k][i XOR $2^j$ ] == true}
     	                        \STATE {dp[j][i]=true}
     	                        \STATE {break}
@@ -65,12 +66,8 @@
     \end{equation}
     $$log(\frac{2^nn^m}{n!}) = n + mlogn - logn!$$
     By using Stirling's Approximation, it can be written as
-    $$\lim_{n \to \infty} log(\frac{2^nn^m}{n!}) = n + mlogn - nlogn + nloge - O(logn)$$
-    We know that
-    $$n + mlogn + nloge - O(logn) = O(n)$$
-    $$nlogn = O(nlogn)$$
-    $$O(nlogn) > O(n)$$
-    When $n \to \infty$, $O(nlogn)$ increases faster than $O(n)$, 
+    $$\lim_{n \to \infty} log(\frac{2^nn^m}{n!}) = n + mlogn - nlogn + nloge - O(logn) = -O(nlogn) = -\infty$$
+    
     so we prove that equation \ref{eqn:2} is correct. Thus equation \ref{eqn:1} is correct and $2^n \times poly(n)=o(n!)$.
 
 \end{solution}
