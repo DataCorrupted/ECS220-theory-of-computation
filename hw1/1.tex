@@ -1,0 +1,48 @@
+\subsection*{Existence, search, and the oracle. (Textbook problem 1.10)}
+    \begin{quote}
+    We can consider two rather different problems regarding Hamiltonian cycles (note a Hamiltonian \emph{cycle} must start and end at the same vertex). One is the decision problem, the yes-or-no question of whether such a cycle exists. The other is the search problem or function problem, in which we want to actually find the cycle. However, the hardness of these problems is very closely related.
+
+    Suppose that there is an oracle in a nearby cave. She will tell us, for the price of one drachma per question, whether a graph has a Hamiltonian cycle. If it does, show that by asking her a series of questions, perhaps involving modified versions of the original graph, we can find the Hamiltonian cycle after spending a number of drachmas that grows polynomially as a function of the number of vertices. Thus if we can solve the decision problem in polynomial time, we can solve the search problem as well.
+    \end{quote}
+
+\solution
+
+The intuition of the solution is that a Hamiltonian cycle is deterministic, which will not be affected by other edges existance.
+In other words, if an edge is not in a Hamiltonian cycle, remove it will not affect the result.
+However, if a graph have multiple Hamiltonian cycles(think of a 4-click), we are free to destroy one cycle and the other will survive. 
+We shall present the proof later.
+
+Now we can conduct the following algorithm:
+
+\begin{algorithm}
+\caption{Get Hamiltonian Cycle with the help of an Oracle}
+\begin{algorithmic}
+	\REQUIRE $G = (E, V)$
+	\STATE $H \leftarrow E$
+	\FOR {$\forall e \in E$} 
+		\IF {Oracle($G(H / \{e\}, V)$) == true} 
+			\STATE $H \leftarrow H / \{e\}$
+		\ENDIF
+	\ENDFOR
+	\RETURN $H$
+\end{algorithmic}
+\end{algorithm}
+
+Now let's proof that this algorithm is correct:
+
+\begin{proof}
+Suppose a true Hamiltonian cycle is $H'$.
+
+First, it is trivial to see that during removing process, remove a non-Hamiltonian edge will not nullify previous preserved Hamiltonian edge.
+
+Therefore we can see that $G' = (H, V)$ have a Hamiltonian cycle, or else $H = \emptyset$ and $G$ has no Hamiltonian cycle(i.e. $H' = \emptyset$ too), leading to $H' \subset H$.
+
+Now we want to prove that $H \subset H'$.
+
+Suppose we have $h \in H, h \notin H'$. But this is impossible as it should have been removed in the algorithm, since \texttt{Oracle($G(H / \{h\}, V)$) == true}.
+
+So we have $H == H'$, the subset of edges we picked should be Hamiltonian cycle.
+
+\end{proof}
+
+Now if the Oracle can solve this in $\P$, since we only do $O(|E|) = O(|V|^2)$ queries to, the overall time complexity is still in $\P$. 

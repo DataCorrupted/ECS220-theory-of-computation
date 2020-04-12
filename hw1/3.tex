@@ -1,0 +1,41 @@
+\subsection*{A little bit more than polynomial time. (Textbook problem 2.20)}
+    \begin{quote}
+    A quasipolynomial is a function of the form $f(n) = 2^{\Theta(\log^k n)}$ for some constant $k > 0$, where $\log^k n$ denotes $(\log n)^k$.
+    Let us define $\QuasiP$ as the class of problems that can be solved in quasipolynomial time.
+    First show that any quasipolynomial $f(n)$ with $k > 1$ is $\omega(g(n))$ for any polynomial function $g(n)$,
+    and that $f(n) = o(h(n))$ for any exponential function $h(n) = 2^{\Theta(n^c)}$ for any $c > 0$.
+    Thus $\P \subseteq \QuasiP \subseteq \EXP$.
+
+    Then show that the set of quasipolynomial functions is closed under composition.
+    Therefore, $\QuasiP$ programs can use each other as subroutines just as $\P$ programs can (see Problem 2.19)
+    even if the main program gives an instance to the subroutine whose size is a quasipolynomial function of the original input size.
+    \end{quote}
+
+ \solution
+
+    Let's denote $f_k(n) =  2^{\Theta(\log^k n)}$.
+\begin{proof}
+    Let's denote $g_t(n) = \Theta(n^t)$, then $\forall k>1, t>0$
+    $$\lim_{n \to \infty} \frac{f_k(n)}{g_t(n)} = \frac{2^{\log_2^n \cdot \Theta((\log n)^{k-1})}} {\Theta(n^t)} = \frac{n^{\Theta((\log n)^{k-1})}}{\Theta(n^t)} = n^{\Theta((\log n)^{k-1} - t)} = \infty$$
+
+    Therefore $f_k(n) = w(g_t(n)) \Rightarrow \P \subset \QuasiP$
+\end{proof}
+
+\begin{proof}
+    Let's denote $h_c(n) = 2^{\Theta(n^c)}$, then $\forall k>1, c>0$,
+    $$\lim_{n \to \infty} \frac{f_k(n)}{h_c(n)} = 2^{\Theta((\log n)^k - \Theta(n^c)} = 2^{-\Theta(n^c)} = 0$$
+
+    Therefore $f_k(n) = o(h_c(n)) \Rightarrow \QuasiP \subset \EXP$
+\end{proof}
+
+To proof that $\QuasiP$ is closed under composition, is to proof: 
+    $$\forall s, t, \exists k \Rightarrow f_s(f_t(n)) = \Theta(f_k(n))$$
+\begin{proof}
+    Let's start with $f_s(f_t(n))$.
+    $$f_s(f_t(n)) = 2^{\Theta(\log^s 2^{\Theta(\log^t n)})} = 2^{\Theta(\Theta(\log^ n)^s)} = s^{\Theta(\log^{st} n)}$$
+
+    As long as we set $k = st$, we can easily have:
+    $$\lim_{n \to \infty} \frac{f_s(f_t(n))}{f_k(n)} \in (0, \infty) \Leftrightarrow f_s(f_t(n)) = \Theta(f_k(n))$$
+
+    Therefore, $\QuasiP$ is closed under composition.
+\end{proof}

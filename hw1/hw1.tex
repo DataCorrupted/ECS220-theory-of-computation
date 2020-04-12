@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{amsthm}
+
+\usepackage{proof}
+
+\usepackage{enumerate}
+\usepackage{fullpage,amsmath,amssymb}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref} % for href links, and also makes \ref and \eqref clickable in the PDF
+
+\usepackage{authblk}
+
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathsf{P}}
+\newcommand{\NP}{\mathsf{NP}}
+\newcommand{\EXP}{\mathsf{EXP}}
+\newcommand{\QuasiP}{\mathsf{QuasiP}}
+\newcommand{\poly}{\mathsf{poly}}
+\newcommand{\TIME}{\mathsf{TIME}}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\solution}{\textbf{Solution}}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    language=Python,
+    keepspaces=true,
+    numbers=left,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    basicstyle=\ttfamily,
+    otherkeywords={self,True,False,yield},
+    keywordstyle=\ttfamily\color{blue!90!black},
+    %basicstyle=\footnotesize,
+    keywords=[3]{ttk},
+    keywordstyle={[2]\ttfamily\color{orange!80!orange}},
+    keywordstyle={[3]\ttfamily\color{red!80!orange}},
+    emph={MyClass,__init__},
+    emphstyle=\ttfamily\color{red!80!black},
+    stringstyle=\color{green!80!black},
+    showstringspaces=false
+}
+
+\usepackage{comment}
+
+\usepackage{fancyhdr}
+\fancypagestyle{firststyle}
+{
+   \fancyhf{}
+   \fancyhead[C]{Copyright \copyright\ \today, David Doty}
+}
+
+
+
+\title{Homework 1 -- ECS 220, Spring 2020}
+\author[1]{Yuyang(Peter) Rong \thanks{PtrRong@ucdavis.edu}}
+\author[1]{Jiayu(Joy) Liu \thanks{JoyLiu@ucdavis.edu}}
+\affil[1]{Department of Computer Science, UC Davis}
+
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+
+\input{1.tex}\newpage
+
+\input{2.tex}\newpage
+
+\input{3.tex}\newpage
+
+\input{4.tex}\newpage
+
+\end{document}
