@@ -53,7 +53,7 @@
     
     Next, I want to explain the algorithm a little bit. Line 1 to line 5 initializes the $dp$ matrix to be all $false$. Since we use bitmasking to represent subsets, $dp[j][i]$ represents whether there is a qualified path in subset $S_i$ and end at node $V_j$. Line 6 to line 8 set subset $S_{2^i}$ to be true because $S_{2^i}$ contains only $V_i$, so it should has a qualified path. Line 9 to line 22 is to iterate all bitmasks(subsets) and all vertices to expand subset $S$, as stated above. Line 11 is checking whether vertex $V_j$ is in subset $S_i$. Line 13 is finding the neighbor of vertex $V_j$ in subset $S_i$, and line 14 is checking whether $S_i - \{V_j\}$ has a qualified path or not. 
     
-    To prove $2^n \times poly(n)=o(n!)$, means that we need to prove
+    To prove $2^n \times poly(n)=o(n!)$, we need to prove
     \begin{equation}
         \label{eqn:1}
         \lim_{n \to \infty} \frac{2^nn^m}{n!} = 0
@@ -68,9 +68,9 @@
     $$\lim_{n \to \infty} log(\frac{2^nn^m}{n!}) = n + mlogn - nlogn + nloge - O(logn)$$
     We know that
     $$n + mlogn + nloge - O(logn) = O(n)$$
-    $$nlogn > O(n)$$
-    $$(nlogn)' = logn + \frac{1}{ln(2)}$$
-    When $n \to \infty$, $nlogn$ increases faster than $n$, 
+    $$nlogn = O(nlogn)$$
+    $$O(nlogn) > O(n)$$
+    When $n \to \infty$, $O(nlogn)$ increases faster than $O(n)$, 
     so we prove that equation \ref{eqn:2} is correct. Thus equation \ref{eqn:1} is correct and $2^n \times poly(n)=o(n!)$.
 
 \end{solution}
