@@ -7,12 +7,12 @@
 
 \solution
 
-The intuition of the solution is that a Hamiltonian cycle is deterministic, which will not be affected by other edges existance.
-In other words, if an edge is not in a Hamiltonian cycle, remove it will not affect the result.
-However, if a graph have multiple Hamiltonian cycles(think of a 4-click), we are free to destroy one cycle and the other will survive. 
-We shall present the proof later.
+Intuitively we understand that a Hamiltonian cycle is deterministic, this means that it will not be affected by the existence of other edges.
+In other words, if an edge is not in a Hamiltonian cycle, removing it will not affect the result.
+However, if a graph has multiple Hamiltonian cycles (consider a 4-clique), we are free to destroy one cycle and the others will persist. 
+The proof follows later.
 
-Now we can conduct the following algorithm:
+Now we can present the following algorithm:
 
 \begin{algorithm}
 \caption{Get Hamiltonian Cycle with the help of an Oracle}
@@ -28,20 +28,20 @@ Now we can conduct the following algorithm:
 \end{algorithmic}
 \end{algorithm}
 
-Now let's proof that this algorithm is correct:
+Now let's prove that this algorithm is correct:
 
 \begin{proof}
 Suppose a true Hamiltonian cycle is $H'$.
 
-First, it is trivial to see that during removing process, remove a non-Hamiltonian edge will not nullify previous preserved Hamiltonian edge.
+First, it is trivial to see that during the removal process, removing a non-Hamiltonian edge will not nullify previous Hamiltonian edge(s).
 
 Therefore we can see that $G' = (H, V)$ have a Hamiltonian cycle, or else $H = \emptyset$ and $G$ has no Hamiltonian cycle(i.e. $H' = \emptyset$ too), leading to $H' \subset H$.
 
 Now we want to prove that $H \subset H'$.
 
-Suppose we have $h \in H, h \notin H'$. But this is impossible as it should have been removed in the algorithm, since \texttt{Oracle($G(H / \{h\}, V)$) == true}.
+Suppose we have $h \in H, h \notin H'$. But this is impossible as it should have been removed in the course of executing our algorithm, since \texttt{Oracle($G(H / \{h\}, V)$) == true}.
 
-So we have $H == H'$, the subset of edges we picked should be Hamiltonian cycle.
+So we have $H == H'$, the subset of edges we picked should be a Hamiltonian cycle.
 
 \end{proof}
 
