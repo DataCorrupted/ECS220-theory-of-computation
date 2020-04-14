@@ -12,7 +12,7 @@
 
     The idea of the solution is here: for every subset $S$ of vertices, check whether there is a path that visits each node in $S$ exactly once and ends at a vertex $v$. Do this for all $v \in S$. If it exists, $v$ can be added to subset $S$ and we can say that $S$ has a Hamiltonian path. We can loop this action until we expand $S$ to contain all vertices in the graph, and we have our answer to the Hamiltonian Path decision problem. 
     
-    We use bitmasking to represent subsets, so our algorithm is as algorithm \ref{code:dp}. Adjacency matrix $A$ is required.
+    We use bitmasking to represent subsets, so our algorithm is equivalent to algorithm \ref{code:dp}. Adjacency matrix $A$ is required.
     
     \begin{algorithm}
     	\caption{Hamiltonian Path decision problem} 
@@ -50,9 +50,9 @@
         \end{algorithmic}
     \end{algorithm}
 
-    This algorithm can solve the decision problem in $O(2^n \times n^2)$ time with a space complexity of $O(n2^n)$. This algorithm cannot solve the Hamiltonian path search problem since it doesn't store the path or the history of visiting the nodes. 
+    This algorithm is capable of solving the decision problem in $O(2^n \times n^2)$ time with a space complexity of $O(n2^n)$. This algorithm does not address the Hamiltonian path search problem since it doesn't store the path or the history of visiting the nodes. 
     
-    Next, I want to explain the algorithm a little bit. Line 1 to line 5 initializes the $dp$ matrix to be all $false$. Since we use bitmasking to represent subsets, $dp[j][i]$ represents whether there is a qualified path in subset $S_i$ and end at node $V_j$. Line 6 to line 8 set subset $S_{2^i}$ to be true because $S_{2^i}$ contains only $V_i$, so it should has a qualified path. Line 9 to line 22 is to iterate all bitmasks(subsets) and all vertices to expand subset $S$, as stated above. Line 11 is checking whether vertex $V_j$ is in subset $S_i$. Line 13 is finding the neighbor of vertex $V_j$ in subset $S_i$, and line 14 is checking whether $S_i - \{V_j\}$ has a qualified path or not. 
+    Next, we want to explain the algorithm a bit. Line 1 to line 5 initializes the $dp$ matrix to be all $false$. Since we use bitmasking to represent subsets, $dp[j][i]$ represents whether there is a qualified path in subset $S_i$ and end at node $V_j$. Line 6 to line 8 set subset $S_{2^i}$ to be true because $S_{2^i}$ contains only $V_i$, so it should have a qualified path. Line 9 to line 22 is to iterate all bitmasks(subsets) and all vertices to expand subset $S$, as stated above. Line 11 is to check whether vertex $V_j$ is in subset $S_i$. Line 13 is finds the neighbor of vertex $V_j$ in subset $S_i$, and line 14 checks whether $S_i - \{V_j\}$ has a qualified path or not. 
     
     To prove $2^n \times poly(n)=o(n!)$, we need to prove
     \begin{equation}
