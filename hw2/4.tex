@@ -1,0 +1,56 @@
+\section*{Crossover logic}
+    \begin{quote}
+    Complete the crossover gadget of Figure 5.11, and hence the reduction from
+    $\textsc{Circuit-Sat}$ to $\textsc{Planar-Circuit-Sat}$,
+    by designing a \emph{planar} circuit of AND, OR, and NOT gates that implements an XOR gate, 
+    where
+    the input and output gates should be \emph{accessible to the outer region} so that they can actually be wired up to other subcircuits in the large circuit without a wire crossing.
+    \end{quote}
+
+    Then general idea is $a \^ b = !((!a \wedge !b) \vee (a \wedge b))$.
+    
+    The circuit for $a xor b$ is shown in the next figure. We assumed input for $a$ and $b$ and listed all true value in the edges.
+
+    Notice how the upper part is doing $a \wedge b$, left part doing $!a \wedge !b$ and lower left exchanging $!a \wedge !b$ and $b$.
+    The right is conbine $!a \wedge !b$ and $a \wedge b$ and negating the result to output.
+
+	\begin{center}
+	\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto, semithick]
+		\node[state] 			(nannb) 							{AND};
+		\node[state] 			(na) 		[above =of nannb]		{NOT};
+		\node[state] 			(nb) 		[below =of nannb]		{NOT};
+		\node[state, initial above] (a) 	[right=of na]			{a};
+		\node[state, initial] 	(b) 		[below=of nb]	 		{b};
+		\node[state] 			(nannbxb) 	[right =of nb]			{OR};
+		\node[state]		 	(nnannb) 	[right=of nannb] 		{NOT};
+		\node[state]		 	(xb) 		[right=of nnannb] 		{AND};
+		\node[state]		 	(xnb) 		[right=of b] 			{NOT};
+		\node[state]		 	(xnannb)	[right=of xnb] 			{AND};
+		\node[state]			(anb)		[above=of xb]			{AND};
+		\node[state]		 	(naxorb) 	[right=of xb] 			{OR};
+		\node[state]		 	(axorb) 	[right=of naxorb] 		{NOT};
+		\node[state, accepting]	(acc) 		[right=of axorb] 		{OUT};
+
+		\path[->]
+			(a) 	edge 		node	{1100} 	(na)
+			(b) 	edge 		node	{1010} 	(nb)
+			(na) 	edge		node	{0011}	(nannb)
+			(nb) 	edge		node	{0101}	(nannb)
+			(naxorb)edge		node	{1001}  (axorb)
+			(axorb) edge		node	{0110}  (acc)
+			(nannb)	edge		node	{0001}  (nnannb)
+			(nnannb)edge		node	{1110}	(xb)
+			(b)		edge		node	{1010}	(xnb)
+			(xnb)	edge		node	{0101}	(xnannb)
+			(b) 	edge		node	{1010}	(nannbxb)
+			(nannb)	edge		node	{0001}	(nannbxb)
+			(nannbxb)	edge	node	{1011}	(xb)
+			(nannbxb)	edge	node	{1011}	(xnannb)
+			(a)			edge	node	{1100}	(anb)
+			(xb)		edge	node	{1010} 	(anb)
+			(xnannb)	edge	node	{0001}	(naxorb)
+			(anb)		edge	node	{1000}	(naxorb)
+			(naxorb)	edge	node	{1001}	(axorb)
+			;
+	\end{tikzpicture}
+	\end{center}

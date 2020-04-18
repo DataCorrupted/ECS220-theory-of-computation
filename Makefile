@@ -8,7 +8,10 @@ endif
 
 all : clean $(patsubst %,%.pdf,$(TARGET)) open
 
-clean :
+clean-pdf :
+	rm -f *.pdf
+
+clean : clean-pdf
 	for i in aux log bbl blg bcf out run.xml fdb_latexmk fls; do \
 		rm -f $(patsubst %,%.$$i,$(TARGET)); \
 	done
