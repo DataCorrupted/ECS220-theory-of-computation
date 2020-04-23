@@ -7,12 +7,12 @@
     the input and output gates should be \emph{accessible to the outer region} so that they can actually be wired up to other subcircuits in the large circuit without a wire crossing.
     \end{quote}
 
-    Then general idea is $a \^ b = !((!a \wedge !b) \vee (a \wedge b))$.
+    Then general idea is $a \texttt{ xor } b = !((!a \wedge !b) \vee (a \wedge b))$.
     
-    The circuit for $a xor b$ is shown in the next figure. We assumed input for $a$ and $b$ and listed all true value in the edges.
+    The circuit for $a \texttt{ xor } b$ is shown in the next figure. We assumed input for $a$ and $b$ and listed all true value in the edges.
 
     Notice how the upper part is doing $a \wedge b$, left part doing $!a \wedge !b$ and lower left exchanging $!a \wedge !b$ and $b$.
-    The right is conbine $!a \wedge !b$ and $a \wedge b$ and negating the result to output.
+    The right is conbining $!a \wedge !b$ and $a \wedge b$ and negating the result to output.
 
 	\begin{center}
 	\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto, semithick]
