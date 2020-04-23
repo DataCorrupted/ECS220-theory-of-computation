@@ -7,12 +7,19 @@
     the input and output gates should be \emph{accessible to the outer region} so that they can actually be wired up to other subcircuits in the large circuit without a wire crossing.
     \end{quote}
 
-    Then general idea is $a \texttt{ xor } b = !((!a \wedge !b) \vee (a \wedge b))$.
+    To implement an \texttt{xor} gate, the general idea is that $a \texttt{ xor } b = !((!a \wedge !b) \vee (a \wedge b))$.
     
-    The circuit for $a \texttt{ xor } b$ is shown in the next figure. We assumed input for $a$ and $b$ and listed all true value in the edges.
+    The circuit for $a \texttt{ xor } b$ is shown in the next figure. 
+
+    Since there are only 4 possible combinations of $a$ and $b$, without loss of generality, we assumed input $a = 1100$ and $b = 1010$ to list all 4 combinations. 
+    The corresponding output for each combination are listed above edges.
 
     Notice how the upper part is doing $a \wedge b$, left part doing $!a \wedge !b$ and lower left exchanging $!a \wedge !b$ and $b$.
     The right is conbining $!a \wedge !b$ and $a \wedge b$ and negating the result to output.
+
+    Now that \texttt{xor} gate is complete, we can copy and paste this circute to Firgure 5.11, and hence finish the reduction from
+    $\textsc{Circuit-Sat}$ to $\textsc{Planar-Circuit-Sat}$.
+    However, then the circute would be large and ugly, so we don't put it up here.
 
 	\begin{center}
 	\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto, semithick]
