@@ -1,4 +1,4 @@
-\section*{Small witnesses are easy to find}
+\begin{exercise}[subtitle = {Small witnesses are easy to find}]
     \begin{quote}
     The definition of $\NP$ requires that the number of bits of the witness is at most polynomial in the number of bits of the input, i.e., $|w| = \poly(n)$.
     Suppose a decision problem $A \in \NP$ has the property that witnesses,
@@ -6,3 +6,8 @@
     i.e., $|w| = O(\log n)$.
     Show that this implies $A \in \P$.
     \end{quote}
+\end{exercise}
+
+\begin{solution}
+	This is sort of trivial in that the candidate witness set has been restricted to such a degree that it allows us to simply check every candidate witness as the solution. This runs in O(n). The candidate set is restricted to size log n, being each bit has two possible states this leaves us with checking n possible candidate witnesses.
+\end{solution}
