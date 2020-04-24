@@ -1,4 +1,5 @@
-\section*{CNF vs.\ DNF }
+
+\begin{exercise}[subtitle = {CNF vs.\ DNF }]
     \begin{quote}
     A Boolean formula is in disjunctive normal form (DNF) if it is an OR of clauses,
     each of which is the AND of a set of literals.
@@ -9,5 +10,12 @@
     {\bf Hint:} consider the formula $(x_1 \vee  y_1) \wedge (x_2 \vee y_2) \wedge \ldots \wedge (x_n \vee y_n).$
     What happens when we convert it to DNF form?
     \end{quote}
+\end{exercise}
 
 
+\begin{solution}
+A formula in DNF-Sat is in P due to its uniquely constrained construction that specifies $n$ sets of literals that are joined by one or many $OR$. This allows us to simply run a brute force algorithm to check every set of literals for a satisfying assignment since we need only satisfy at least one of the sets. This scheme runs in O(n).
+
+For the next part we demonstrate that a CNF can be converted into an equivalent DNF through the power of the boolean distributive law. The only problem is that the input size of the problem increases exponentially due to the distribution when undergoing this conversion. ex. $(AvB)$ \wedge $(XvY)$ \equiv $(A\wedge X)$v$(A \wedge Y)$v$(B \wedge X)$v$(B \wedge Y)$ Adding another set of literals makes this get ugly very quickly. The reduction takes exponential time, which demonstrates that it does not prove P=NP.
+
+\end{solution}
