@@ -6,7 +6,7 @@ endif
 
 .PHONY : clean all open
 
-all : clean $(patsubst %,%.pdf,$(TARGET)) open
+all : clean $(patsubst %,%.pdf,$(TARGET)) $(patsubst %,open_%,$(TARGET))
 
 clean-pdf :
 	rm -f *.pdf
@@ -23,5 +23,5 @@ clean : clean-pdf
 	xelatex $(basename)
 	xelatex $(basename)
 
-open : $(TARGET).pdf
-	$(PDFVIEWER) $(shell pwd)/$(TARGET).pdf &
+open_% : %.pdf
+	$(PDFVIEWER) $(shell pwd)/$< &

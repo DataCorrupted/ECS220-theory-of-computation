@@ -1,0 +1,22 @@
+\input{hw3.tex}
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+\vspace{-2.0cm}
+
+\section*{Search is easy if decision is easy.}
+    In computational complexity theory, we study mostly decision problems
+    (e.g., \emph{determine if a Boolean formula has a satisfying assignment}),
+    instead of the search problems that are typically what practicing computer scientists really want to solve
+    (e.g., \emph{determine if a Boolean formula has a satisfying assignment, and then output the assignment}).
+    It is natural to wonder whether we are studying the wrong thing.
+    In this exercise, you will show that the difficulty of decision problems is in fact linked closely to that of search problems.
+        Show that if $\P = \NP$, then every $\NP$ search problem can be solved in polynomial time.
+    In other words, for each language $A \in \NP$, with a polynomial-time verifier algorithm $V_A$ taking inputs $x,w$, where $x \in A \iff (\exists w)\ V_A(x,w)$ accepts, then there is a polynomial-time algorithm $S$ that, on input $x$, does the following.
+    If $x \not\in A$, then $S(x)$ outputs ``no''.
+    If $x \in A$, then $S(x)$ outputs $w$ such that $V_A(x,w)$ accepts.
+        {\bf Hint:}
+    Build up the witness $w$ bit by bit, by asking $\NP$ questions about the next bit, which are answerable in polynomial time if $\P = \NP$.
+    These $\NP$ questions may not exactly correspond to $A$ itself, but a related $\NP$ problem can be defined.
+
+\end{document}

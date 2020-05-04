@@ -1,0 +1,14 @@
+\input{hw3.tex}
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+\vspace{-2.0cm}
+
+\section*{Really independent sets}
+    \begin{quote}
+    Given a graph $G = (V,E)$, say that a subset $S \subseteq V$ is \emph{really independent} if there are no $u,v \in S$ that are two or fewer steps apart in the graph---that is, if for all $u,v \in S$, the length of the shortest path
+    between $u$ and $v$ is at least 3.
+    The problem \textsc{ReallyIndependentSet} takes a graph $G$ and an integer $k$ as input, and asks if $G$ has a really independent set of size $k$ or more.
+    Prove that \textsc{ReallyIndependentSet} is $\NP$-complete.
+    \end{quote}
+\end{document}

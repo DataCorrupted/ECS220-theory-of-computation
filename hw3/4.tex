@@ -1,0 +1,19 @@
+\input{hw3.tex}
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+\vspace{-2.0cm}
+
+\section*{In the stratosphere, nondeterminism doesn’t matter.}
+    \begin{quote}
+    Define $2\uparrow^k n$ as $2^{2^{...2^n}}$, where the tower has $k$ 2's (see also Note 7.12 in the textbook).
+    For example $2 \uparrow^3 n = 2^{2^{2^n}}$.
+    Now consider the following rather powerful complexity class:
+    \[
+        \mathsf{ZOWIE} =
+        \bigcup_{k=1}^\infty \mathsf{TIME}(2\uparrow^k n).
+    \]
+    Show that $\mathsf{ZOWIE} = \mathsf{NZOWIE}$.
+    So, if our computation time is stratospheric enough--if our class of time complexity functions has strong enough closure properties--then nondeterminism makes no difference.
+    \end{quote}
+\end{document}
