@@ -6,14 +6,14 @@ endif
 
 .PHONY : clean all open
 
-all : clean $(patsubst %,%.pdf,$(TARGET)) $(patsubst %,open_%,$(TARGET))
+all : clean clean-pdf $(patsubst %,%.pdf,$(TARGET)) $(patsubst %,open_%,$(TARGET))
 
 clean-pdf :
 	rm -f *.pdf
 
-clean : clean-pdf
+clean : 
 	for i in aux log bbl blg bcf out run.xml fdb_latexmk fls; do \
-		rm -f $(patsubst %,%.$$i,$(TARGET)); \
+		rm -f *.$$i ;\
 	done
 	-rm -f *~
 
