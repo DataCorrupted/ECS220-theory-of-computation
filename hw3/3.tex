@@ -19,4 +19,36 @@
     Build up the witness $w$ bit by bit, by asking $\NP$ questions about the next bit, which are answerable in polynomial time if $\P = \NP$.
     These $\NP$ questions may not exactly correspond to $A$ itself, but a related $\NP$ problem can be defined.
 
+
+\section*{solution}
+Let's consider an algorithm like this.
+\begin{algorithm}
+\caption{$S(x)$} 
+\begin{algorithmic}[]
+\Require $x, A, V_A, t$
+\If {$x \notin A$} \Return {$No$}
+\EndIf
+\State {$w = 1$}
+\While {$!T(V_A, x, w)$}
+\State {$w++$}
+\EndWhile
+\Return {$w$}
+\end{algorithmic}
+\end{algorithm}
+
+This algorithm takes input $x$, language $A$, the polynomial-time verifier 
+algorithm $V_A$ and a time bound $t$, which is in unary. First it verifies 
+whether $x \in A$, if not, returns $No$. Denote the size of $x$ to be $n$, 
+the verification process of whether $x \in A$ should be done in $Poly(n)$. 
+If $x \in A$, the algorithm tries to build up the witness $w$ bit by bit 
+and repeatedly tests whether $V_A$ can verify input $x$ with witness $w$ 
+in polynomial time. The test can be done by plugging in $w$ and run $V_A$ 
+to see if $V_A$ can do it within the time bound $t$, which ensures the test 
+to be in $Poly(n)$. If yes, we find the $w$ we need, if no, we continue to 
+try next $w$. Since $w$ has a size of $Poly(n)$ and $T(V_A, x, w)$ is in 
+$Poly(n)$, $S(x)$ has a time complexity of $Poly(n) + Poly(n)*Poly(n) = Poly(n)$. 
+Since $x \in A \iff (\exists w)V_A(x, w)$, 
+we are ensured to find $w$ in polynomial time, which means we can solve the 
+search problem in polynomial time if $P = NP$.
+
 \end{document}
