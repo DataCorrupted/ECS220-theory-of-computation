@@ -21,7 +21,6 @@ clean :
 %.pdf : %.tex
 	$(eval basename = $(patsubst %.tex,%,$<))
 	xelatex $(basename)
-	xelatex $(basename)
 
 open_% : %.pdf
 	$(PDFVIEWER) $(shell pwd)/$< &
