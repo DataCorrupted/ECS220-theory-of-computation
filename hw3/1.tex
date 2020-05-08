@@ -38,6 +38,8 @@ We would be proofing $\RIS \in \NPC$ by reducing $\tSAT$ to it.
 
     For each clause we construct a 3-clique. With each node labelled itself or it's negation depends on the clause.
     Now we have $k$ 3-cliques, find all negation pairs(i.e. nodes labelled with $a$ and $-a$), add a dummy node $D$ and connect $D$ with both nodes.
+
+    Finally, connect all dummy nodes $D$.
 \end{definition}
 
 \textbf{Example} The follow image shows how a $\tSAT$ $F = (a \vee b \vee c) \wedge (-c \vee d \vee e) \wedge (-a\vee -c \vee d)$ is converted into a graph.
@@ -68,7 +70,13 @@ Meanwhile we have to set the distance to 2 instead of 1 or we might have differe
     \textit{Note}: This lemma comes handy when proving $\Leftarrow$ direction in the next proof. 
 
     Suppose there is dummy node $D$. 
-    Then the two 3-clique connected by $D$ will have a distance to $D$ less equal than 2. 
+    Then we have the following consequences:
+    \begin{enumerate}
+        \item The two 3-clique connected by $D$ will have a distance to $D$ less equal than 2. 
+        \item All other dummy nodes cannot be picked.
+        \item Any other 3-clique have a distance to $D$ with a distance of 2 or 3, no more.
+    \end{enumerate}
+    
     Then the $\RIS$ of this graph is at most $k-1$ since there are only $k$ 3-cliques.
 
     Therefore, dummy node $D$ cannot be selected into $\RIS$ is there is one.

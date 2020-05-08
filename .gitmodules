@@ -1,0 +1,3 @@
+[submodule "listings-rust"]
+	path = listings-rust
+	url = ./listings-rust/

@@ -1,4 +1,5 @@
 \input{hw3.tex}
+\newtheorem{theorem}{Theorem}
 \begin{document}
 \maketitle
 \thispagestyle{firststyle}
@@ -22,68 +23,65 @@
 
 \section*{solution}
 Let's consider an algorithm like this.
-\begin{algorithm}
-\caption{$S(x)$} 
-\begin{algorithmic}[]
-\Require $x, A, V_A, t$
-\If {$x \notin A$} \Return {$No$}
-\EndIf
-\State {$w = 1$}
-\While {$!T(V_A, x, w)$}
-\State {$w++$}
-\EndWhile
-\Return {$w$}
-\end{algorithmic}
-\end{algorithm}
 
-\begin{lstlisting}
+\begin{lstlisting}[language=Rust]
 /// Gien a verifier and an input x
-/// ask if w is the prefix of the witness.
+/// returns if w is the prefix of the witness.
 fn is_prefix(v_a: Verifier, x: Bits, w: Bits) -> bool {
-	// prove this is an NP algorithm
-	// This is not hard as I can construct a Non-deterministic Turing
-	// Machine that randomly guesses the following bits and run the 
-	// verifier.
-	// P.S. I have no idea how to prove without Non-deterministic 
-	// TM.
+    // prove this is an NP algorithm
+    // This is not hard as I can construct a Non-deterministic Turing
+    // Machine that randomly guesses the following bits and run the 
+    // verifier.
+    // P.S. I have no idea how to prove without Non-deterministic 
+    // TM.
 }
 
-// Given a verifier and an input, find the witness.
-// Suppose we already know that the input is in language A.
-// The length of `w` must be in Ploy(n), where n is the length of x.
-// The function `is_prefix()` is NP, and since NP = P, it is also in
-// Ploy(n). Therefore the whole algorithm runs in 
-// Ploy(n) * Ploy(n) = Ploy(n).
+/// Given a verifier and an input, find the witness.
+/// Suppose we already know that the input is in language A.
+/// The length of `w` must be in Ploy(n), where n is the length of x.
+/// The function `is_prefix()` is NP, and since NP = P, it is also in
+/// Ploy(n). Therefore the whole algorithm runs in 
+/// Ploy(n) * Ploy(n) = Ploy(n).
 fn find_witness(v_a: Verifier, x: Bits) -> Bits {
-	let mut w = 0
-	loop {
-		if is_prefix(v_a, x, (w << 1) + 1) {
-			w = (w << 1) + 1;
-		} else if is_prefix(v_a, x, (w << 1) + 0)  {
-			w = (w << 1) + 0;
-		} else {
+    let mut w = 0
+    loop {
+        if is_prefix(v_a, x, (w << 1) + 1) {
+            w = (w << 1) + 1;
+        } else if is_prefix(v_a, x, (w << 1) + 0)  {
+            w = (w << 1) + 0;
+        } else {
             // If add 0 and 1 cannot be prefix
             // then we must have found the witness
-			return w;
-		}
-	}
+            return w;
+        }
+    }
 }
 \end{lstlisting}
 
 Now let's take a look at the algorithm here. Denote the desired witness to be 
-$w_0$. $is\_prefix()$ is the function to determind whether current $w$ is the 
-prefix of $w_0$. $find\_witness()$ is the function that we build up $w$ bit by 
-bit and check if the \emph{next} $w$ is $w_0$. If it's not, we keep building it 
-up. If it is, we return $w$.
+\lstinline{w_0}. 
 
-Note that this is the function that handles the situation when $x \in A$. In the 
-whole process we need to first determine whether $x$ is in $A$, that should be 
-done in $Poly(n)$ since the size of $x$ is $n$. 
+\lstinline{is_prefix(v_a: Verifier, x: Bits, w: Bits)} determinds whether current \lstinline{w} is the 
+prefix of \lstinline{w_0}. \lstinline{find_witness(v_a: Verifier, x: Bits)} builds up \lstinline{w} bit by 
+bit and check if the \emph{next} \lstinline{w} is\lstinline{w_0}. If it's not, we keep building it 
+up. If it is, we return \lstinline{w}.
 
-$is\_prefix()$
+\begin{theorem}
+    \lstinline{is_prefix(v_a: Verifier, x: Bits, w: Bits)} $\in \NP$
+\end{theorem}
 
+\begin{proof}
+	We can construct a non-deterministic turing machine to finish this.
+	
+	Given a \lstinline{w}, non deterministiclly guess the following bits, the total number of guesses is in $Poly(n)$ as the maximum length of \lstinline{w_0} is $Poly(n)$. 
+	For each guess, we run the verifier which will return true or false in $Poly(n)$.
 
-Since we can find $w$ in polynomial time, we prove that we can solve the 
-search problem in polynomial time if $P = NP$.
+	Therefore, a non-deterministic turing machine can finish this in $Poly(n)$ and thus this function is in $\NP$
+\end{proof}
+
+Note that this is the function that handles the situation when $x \in A$. 
+In the whole process we need to first determine whether $x$ is in $A$, that should be done in $Poly(n)$ since the size of $x$ is $n$. 
+
+Since we can find \lstinline{w_0} in polynomial time, we prove that we can solve the search problem in polynomial time if $P = NP$.
 
 \end{document}
