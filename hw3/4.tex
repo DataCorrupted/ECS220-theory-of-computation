@@ -20,12 +20,13 @@
 \section*{solution}
 
 
-
-ZOWIE can be viewed as a drastically more complex version of the class of EXP problems, with the added ability to scale in a tetrative fashion. EXP being those problems solvable within the constraints of a deterministic machine within TIME($2^{poly(n)}$ ). With ZOWIE we have the union of all problems with $k$ equaling some integer (ranging to infinity), $k$ gives us the amount of "up arrows" to use in describing the time given to solve a particular problem. 
+ZOWIE can be viewed as a drastically more complex version of the class of EXP problems, with the added ability to scale in a tetrative fashion. EXP being those problems solvable within the constraints of a deterministic machine within TIME($2^{poly(n)}$ ). With ZOWIE we have the union of all problems with $k$ equaling some integer (ranging to infinity), $k$ gives us the height of the tower of base 2 to use in describing the time given to solve a particular problem. 
 
 This can be seen as an interesting analogue to HW2's problem of "Small Witnesses are Easy to Find." Where the complexity class was so restricted so as to make it trivial to just search all possible solutions and still be within the constraints given. Instead in this case we are gifted so much deterministic time, increasing the complexity class, that we can try all possibilities for a given problem and still be within our constraints. 
 
-So given any problem within NZOWIE, we can move that problem to ZOWIE by simply increasing $k$. Since this tetratively grows the amount of time given to solve the problem in a deterministic fashion we are able to produce an algorithm within the rather considerably large time constraint.     
+So given any problem within NZOWIE, we can move that problem to ZOWIE by simply increasing $k$. Where the nondeterministc problem would take $t$ nondeterministic time, we can emulate this using a deterministic machine in $2^{t}$. 
+This grows the amount of time given to solve the problem in a deterministic fashion we are able to produce an algorithm within the rather considerably large time constraint. 
+  
     
     
     
