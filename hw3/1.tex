@@ -34,7 +34,7 @@ We would be proofing $\RIS \in \NPC$ by reducing $\tSAT$ to it.
 \end{proof}
 
 \begin{definition}{Reduction}
-    Suppose we are given a $\tSAT$ problem with $k$ clauses. In each clause there are five variables: $a$, $b$, $c$, $d$, $e$.
+    Suppose we are given a $\tSAT$ problem with $k$ clauses.
 
     For each clause we construct a 3-clique. With each node labelled itself or it's negation depends on the clause.
     Now we have $k$ 3-cliques, find all negation pairs(i.e. nodes labelled with $a$ and $-a$), add a dummy node $D$ and connect $D$ with both nodes.
@@ -54,7 +54,7 @@ Meanwhile we have to set the distance to 2 instead of 1 or we might have differe
 \begin{proof}
     For $k$ 3-cliques, the total time required is linear to $k$, therefore $O(k)$.
 
-    For each variable, suppose out of $k$ clauses, there are only $s$ of them and $t$ of them are negated, then we would add $t(s-t) \leq O(k^2)$ nodes since $s \leq k$, $t \leq k$. 
+    For each variable, suppose out of $k$ clauses, there are only $s$ of them and $t$ of them are negated, then we would add $t(s-t) \leq O(k^2)$ nodes since $s \leq 3k$, $t \leq 3k$. 
     There are at most $3k$ different variables, so the maximum complexity is $O(k^3)$.
 
     Therefore the total time for this reduction would be $O(k^3)$.
