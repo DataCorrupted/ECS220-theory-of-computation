@@ -1,6 +1,7 @@
 \input{hw3.tex}
 \newtheorem{theorem}{Theorem}
-\theoremstyle{definition}
+%\theoremstyle{definition}
+\newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}{Definition}[section]
 
 \begin{document}
@@ -29,29 +30,82 @@ We would consider $\tSAT \le_P \fSAT$ to be trivial, and since $\tSAT \in \NPC$,
 \end{theorem}
 
 \begin{proof}
-    Proof. $\RIS \in \NP $
+    A brute force enumeration over all possible combination over $k$ nodes would take $O(C^k_{|V|})$, for each possibility, the time to verify it would be $O(1)$ if we pre-compute a distance map between all pairs of nodes.
+    Therefore, we can say $\RIS \in \NP$
+    
+    P.S. It's trivial that if a $\RIS$ of size $k+1$ exists, a $\RIS$ of size $k$ must exist, thus we don't enumerate combinations with size larger than $k$.
 \end{proof}
 
 \theoremstyle{definition}
 \begin{definition}{Reduction}
-    Define.
+    Suppose we are given a $\fSAT$ problem with $k$ clauses. In each clause there are five variables: $a$, $b$, $c$, $d$, $e$.
 
+    For each clause we construct a 5-clique. With each node labelled itself or it's negation depends on the clause.
+    Now we have $k$ 5-cliques, find all negation pairs(i.e. nodes labelled with $a$ and $-a$), add a dummy node $D$ and connect $D$ with both nodes.
 \end{definition}
+
+\textbf{Example} The follow image shows how a $\fSAT$ $F = (a \vee b \vee c \vee d \vee e) \wedge (a \vee b \vee -c \vee d \vee e) \wedge (-a \vee b \vee -c \vee d \vee e)$ is converted into a graph.
+
+\includegraphics[width = \textwidth]{Ex1.png}
+
+The intuition behind the reduction is that any variable cannot have itself coexist with its negation, so all pairs of non-negation and negation variable has a distance of 2. 
+Meanwhile we have to set the distance to 2 instead of 1 or we might have different variables having a distance less than 3.
 
 \begin{theorem}
     Reduction is in $\P$
 \end{theorem}
 
 \begin{proof}
-    Proof. Reduction is in $\P$
+    For $k$ 5-cliques, the total time required is linear to $k$, therefore $O(k)$.
+
+    For each variable, suppose out of $k$ clauses, $t$ of them are negated, then we would add $t(k-t) = O(k^2)$ nodes since each non-negation and negation pair has to be connected.
+
+    Therefore the total time for this reduction would be $O(k^2)$
+\end{proof}
+
+
+\begin{lemma}
+    If such reduced graph has $\RIS$ of size $k$, there will be no dummy node $D$ in $\RIS$
+\end{lemma}
+
+\begin{proof}
+    \textit{Note}: This lemma comes handy when proving $\Leftarrow$ direction in the next proof. 
+
+    Suppose there is dummy node $D$. 
+    Then the two 5-clique connected by $D$ will have a distance to $D$ less equal than 2. 
+    Then the $\RIS$ of this graph is at most $k-1$ since there are only $k$ 5-fliques.
+
+    Therefore, dummy node $D$ cannot be selected into $\RIS$ is there is one.
 \end{proof}
 
 \begin{theorem}
-    $\fSAT$ is satisfiable iff $\RIS$
+    $\fSAT$ is satisfiable iff the reduced graph has $\RIS$.
 \end{theorem}
 
 \begin{proof}
-    Proof. $\fSAT$ is satisfiable iff $\RIS$
+    $\Rightarrow$
+    
+    Suppose we have a set of solutions to $\fSAT$, then for each clause there must be at least one node evaluates to true.
+    In each clique, we randomly select ONE such true node. The set of all nodes selcted from each 5-clique would be $\RIS$.
+
+    It is easy to see that all pairs of selected nodes must have a distance larger than 2: The connection between two clique take distance of 2 and the directly connected nodes cannot be picked at the same time as they are the negation of each other.
+
+    Example: Think of the distance between $c$ and $d$ in the example, both distance is 3(except for the $d$ in the same clique.)
+
+    $\Leftarrow$
+
+    Since dummy node $D$ cannot be selected as we have proved in the lemma above, in each 5-clique the distance between all nodes is 1. 
+    Then the only possible way to form a $\RIS$ is by selecting one node in each clique.
+    We claim that the selected nodes, when setting corresponding variable to true, $\fSAT$ will be solved.
+
+    First let's proof that the selected nodes are not conflicting, i.e. $a$ and $-a$ cannot be selected at the same time.
+    Per the definition of $\RIS$, this is trivial as any negation nodes have distance of 2.
+
+    Then let's proof that the selected nodes do solve $\fSAT$.
+    In each 5-clique one node is selected to be true, and therefore corresponding clause is true. 
+    Since all 5-clique got one node selected, all clauses are true.
 \end{proof}
+
+Therefore, we have proved  that $\fSAT \le_P \RIS$, and thus, $$\RIS \in \NPC$$
 
 \end{document}

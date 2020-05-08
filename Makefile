@@ -12,7 +12,7 @@ clean-pdf :
 	rm -f *.pdf
 
 clean : 
-	for i in aux log bbl blg bcf out run.xml fdb_latexmk fls; do \
+	for i in aux log bbl blg bcf out run.xml fdb_latexmk fls synctex.gz; do \
 		rm -f *.$$i ;\
 	done
 	-rm -f *~
