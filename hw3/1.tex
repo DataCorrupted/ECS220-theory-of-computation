@@ -10,7 +10,7 @@
 
 \newcommand{\RIS}{\textsc{ReallyIndependentSet}}
 \newcommand{\NPC}{\mathsf{NP}\texttt{-complete}}
-\newcommand{\tSAT}{\mathsf{3}\texttt{3-SAT}}
+\newcommand{\tSAT}{\texttt{3-SAT}}
 
 \section{Really independent sets}
     \begin{quote}
@@ -82,7 +82,7 @@ Meanwhile we have to set the distance to 2 instead of 1 or we might have differe
     $\Rightarrow$
     
     Suppose we have a set of solutions to $\tSAT$, then for each clause there must be at least one node evaluates to true.
-    In each clique, we randomly select ONE such true node. The set of all nodes selcted from each 3-clique would be $\RIS$.
+    In each clique, we randomly select ONE such true node. The set of all nodes selected from each 3-clique would be $\RIS$.
 
     It is easy to see that all pairs of selected nodes must have a distance larger than 2: The connection between two clique take distance of 2 and the directly connected nodes cannot be picked at the same time as they are the negation of each other.
 
