@@ -8,6 +8,10 @@
     The problem $\textsc{GiantCliqueSubsets}$ takes as input a graph $G = (V,E)$ on $n$ vertices, and asks whether each subset of $n/2$ vertices contains a clique of size $n/4$. Show that $\textsc{GiantCliqueSubsets}$ is contained in one of the classes in the second level of the polynomial hierarchy.
  
 \section*{solution}
+There are two ways we can tackle with this problem. 
+
+The first one uses the definition we talked about in the class:
+
 We try to show the \textsc{GiantCliqueSubsets} problem in the form of $\Sigma_2P$. 
 Recall that the \textsc{Clique} problem is in $\NP$ and its predicate can be written like this.
 $$A(x) = (\exists w)B(x, w)$$
@@ -18,6 +22,7 @@ subset with size $n/2$ that has $w_1$. $A'(x)$ is the predicate of the \textsc{G
 So we can see that the \textsc{GiantCliqueSubsets} problem is in the second level of polynomial hierarchy.
 
 
+The other one utilizes the very definition of NP: The class of problem that can be solved in polynomial time with a Non-deterministic turing machine.
 We are going to show that, $\textsc{GiantCliqueSubsets} \subset \NP^{\NP} = \Sigma_2^P$ and thus in the second level of the polynomial hierarchy.
 
 We are going to construct a Non-determinitic Turing Machine with an oracle that can tell us the answer to $\textsc{KClique} \subset \NP$
