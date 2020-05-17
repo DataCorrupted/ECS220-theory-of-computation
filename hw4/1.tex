@@ -19,6 +19,51 @@
     and
     2) every set $R$ with $|R| \geq |\N|$ has a countable subset.
 
+\section*{Solution}
 
+We are going to proof this by construct two bijection functions to proof that $|S \setminus \N| \le |S|$ and $|S \setminus \N| \ge |S|$, which is the standard way to proof that two infinite sets are equal.
+
+\begin{theorem}
+    $|S \setminus \N| \le |S|$
+\end{theorem}
+
+\begin{proof}
+    Proof this is easy, we can construct an identical map s.t. $\forall x \in S \setminus \N, f(x) = x \in S$.
+    This $f$ is bijection and thus proved $|S \setminus \N| \le |S|$.
+\end{proof}
+
+\begin{theorem}
+    $|S \setminus \N| \ge |S|$
+\end{theorem}
+
+\begin{proof}
+    We can get a new countable infinite subset $M$ from $S \setminus \N$. 
+    Then it goes without saying that $M \subset S \setminus \N \subset S$, $M \cap \N = \emptyset$.
+
+    Since both $M$ and $\N$ are countable, we can use indexes to label them. 
+    From now on, we would use $m_k$ to refer to the k-th element in $M$ and $n_k$ to the k-th element in $\N$.
+
+    Then we can construct a function, which is identical for all element not in $M$ and $\N$, and we condence two countable sets($M$ and $\N$) to one($\N$) for all other elements in $S$:
+
+    \begin{align*}
+        \forall x \in S, f(x) = \begin{cases}
+            x          & x \in S \setminus (\N \cup M) \\
+            n_{2k}     & \exists k, x = n_k \in \N     \\
+            n_{2k+1}   & \exists k, x = m_k \in M       
+        \end{cases}
+    \end{align*}
+
+    This is clearly a bijection as all results cannot be the same the each other. 
+    Therefore, with this bijection we have $|S \setminus \N| \ge |S|$.
+\end{proof}
+
+
+\begin{theorem}
+    $|S \setminus \N| = |S|$
+\end{theorem}
+
+\begin{proof}
+    Since $|S \setminus \N| \le |S|$ and $|S \setminus \N| \ge |S|$, $|S \setminus \N| = |S|$.
+\end{proof}
 
 \end{document}

@@ -1,4 +1,5 @@
 \input{hw4.tex}
+\newtheorem{theorem}{Theorem}
 \begin{document}
 \maketitle
 \thispagestyle{firststyle}
@@ -23,6 +24,91 @@
     \end{quote}
     No need to write the transition function;
     just describe the algorithm and argue it requires only a finite number of states no matter how large the region.
+
+\section*{Solution}
+
+We shall give a highly abstracted algorithm in programming language Rust:
+
+\begin{lstlisting}[language=Rust, style=boxed]
+
+fn verify_rect(env: Environment) -> bool {
+    // Initial state: in the middle of nowhere, 
+    // keep going to north to find the first wall.
+    while (!env.wall_on_north()) {
+        env.step_north();
+    }
+
+    // We have find the north wall, goes to north east corner.
+    while (!env.wall_on_east()) {
+        env.step_east();
+
+        // If suddenly the north side has no wall, then the north wall is  
+        // not straight. e.g. P is our previous position and N is our 
+        // current position.
+        //     xxxx
+        // xxxxx..xxxx
+        // x...PN....x
+        // x.........x
+        // xxxxxxxxxxx
+        //
+        if (!env.wall_on_north()) {
+            return false;
+        }
+    }
+
+    // We are in the north east corner, go south.
+    while (!env.wall_on_south()) {
+        env.step_south();
+
+        // The east wall is not straight.
+        if (!env.wall_on_east()) {
+            return false;
+        }
+    }
+
+    // We are in the south east corner, go west.
+    while (!env.wall_on_west()) {
+        env.step_west();
+
+        // The south wall is not straight.
+        if (!env.wall_on_south()) {
+            return false;
+        }
+    }
+
+    // We are in the south west corner, go north.
+    while (!env.wall_on_north()) {
+        env.step_north();
+
+        // The west wall is not straight.
+        if (!env.wall_on_west()) {
+            return false;
+        }
+    }
+
+    // We are in the north west corner, go east.
+    while (!env.wall_on_east()) {
+        env.step_east();
+
+        // The north wall is not straight.
+        if (!env.wall_on_north()) {
+            return false;
+        }
+    }
+
+    true
+}
+\end{lstlisting}
+
+\begin{theorem}
+    Algorithm defined above is finite.
+\end{theorem}
+
+\begin{proof}
+    Since this is a finite region as mentioned. 
+    Then each loop must finish in a finite step, thus this function is guaranteed to return.
+    The time complexity would be $O(m)$ where $m$ is the diameter of this region.
+\end{proof}
 
     
 
