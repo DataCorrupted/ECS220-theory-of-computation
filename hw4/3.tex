@@ -26,12 +26,31 @@
     
     We start from the value $n=6=2^1 3^1$. At each step, we find the first fraction $f=\frac{p}{q}$ such that $q$ divides $n$ (i.e., such that $n \cdot f$ is an integer), and then replace $n$ by $n \cdot f$. If there is no such $f$, the program halts.
     
-    For this example, the sequence of values produced will include the infinite subsequence $2^1 3^1$, $2^1 3^2$, $2^3 3^5$, $2^5 3^8$, $2^8 3^{13}$, $\ldots$.
+    For this example, the sequence of values produced will include the infinite subsequence $2^1 3^1$, $2^1 3^2$, $2^2 3^3$, $2^3 3^5$, $2^5 3^8$, $2^8 3^{13}$, $\ldots$.
     Whenever $n$ is only divisible by $2$ and $3$, the exponents will be adjacent Fibonacci numbers.
     
     Prove why this program outputs the Fibonacci numbers in this way, or instead find your own program that outputs Fibonacci numbers and prove it works.
     
     \textbf{Hint:} you can view this computation as a special type of counter machine.
     See section 7.6.2 in the text for more examples.
+
+\section*{Solution}
+
+We shall setch this model to a counter machine. 
+In this machine, we proved that given input of the form $2^s3^t$, the output put has to be in the same form thanks to the predicates in the machine.
+
+Notice the asserts and branches in the graph that guarantees that at accepting state the number of $5, 7, 11, 13, 17$'s  are all zero.
+
+Not let's proof that this machine actually generates a Fib sequence.
+We shall prove by reduction.
+
+\begin{proof}
+    Case $s = 1, t =  1$, it is shown in the example(also in the counter machine we showed) that 
+    
+    Other cases: suppose that we have proved that $ s' < s, t' < t$ input $2^{s'}3^{t'}$ would output $2^{t'}3^{s' + t'}$
+        
+
+\end{proof}
+
 
 \end{document}
