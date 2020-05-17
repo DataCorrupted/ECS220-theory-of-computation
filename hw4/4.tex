@@ -1,0 +1,32 @@
+\input{hw4.tex}
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+\vspace{-2.0cm}
+
+
+\section{Two dimensions.}
+    Recall that a counter machine is like a finite-state robot that lives in the discrete first quadrant, with infinite walls along the $x$-axis and $y$-axis,
+    that can detect if it is up against either wall, but otherwise has no information about its position.
+    Now we generalize this to other types of regions.
+    \begin{quote}
+    Consider two-dimensional finite automata that are trapped inside some finite region in the planar grid.
+    At each step, they can move one step in one of the cardinal directions based on their current state, and then update their state.
+    Like the automata discussed in Section 7.6.1, they cannot write anything on the cells they visit, and the only way they can sense their current position is to tell when they are next to a wall
+    (and which side the wall is on).
+    Thus, if $S$ is their finite set of states,
+    then their transition function can be written $F: S \times \{\text{wall}, \text{not wall} \}^4 \to S \times \{\uparrow, \downarrow, \leftarrow, \rightarrow\}$,
+
+
+    Sketch a description of a two-dimensional automaton that can determine
+    whether the region it is trapped in is a rectangle.
+    \end{quote}
+    No need to write the transition function;
+    just describe the algorithm and argue it requires only a finite number of states no matter how large the region.
+
+    
+
+    
+    
+    
+\end{document}

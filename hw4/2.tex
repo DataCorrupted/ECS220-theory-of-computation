@@ -1,0 +1,32 @@
+\input{hw4.tex}
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+\vspace{-2.0cm}
+\section{More undecidable problems. }
+\begin{quote}
+    Show that it is undecidable, given the source code of a program $Q$, to tell whether or not any of the following is true:
+    \begin{enumerate}[(i)]
+      \item $Q$ halts on input 0.
+      \item $Q$ is total -- that is, $Q(y)$ halts for all $y$.
+      \item $Q(y)=$ {\tt true} for all $y$.
+      \item The set of $y$ on which $Q$ halts is finite.
+      \item There is a $y$ such that $Q(y)= y$.
+      \item Given a second program $R$, $Q$ is equivalent to $R$.
+      That is, even though $Q$ and $R$ have different source codes,
+      they compute the same partial function --
+      for all $y$, either $Q(y)$ and $R(y)$ both halt and return the same answer, or neither halts.
+    \end{enumerate}
+    Prove each of these by reducing $\textsc{Halting}$ to them.
+    That is, show to how convert an instance $(P, x)$ of $\textsc{Halting}$ to an instance of the problem above.
+    For instance, you can modify $P$'s source code,
+    or write a new program that calls $P$ as a subroutine.
+    Each of these is asking for a Turing reduction;
+    your reduction does not necessarily have to map yes-instances to yes-instances and no-instances to no-instances --
+    all that matters is that if you could solve the problem,
+    then you could solve $\textsc{Halting}$.
+\end{quote}
+
+
+
+\end{document}

@@ -1,0 +1,37 @@
+\input{hw4.tex}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+\vspace{-2.0cm}
+
+
+\section{Programming with Fractions}
+    The late John Conway invented the following programming language that is defined by a finite sequence of fractions.
+    
+    Consider the following example:
+    
+    \[
+    \frac{33}{14} \quad
+    \frac{21}{22} \quad
+    \frac{13}{7} \quad
+    \frac{13}{11} \quad
+    \frac{26}{85} \quad
+    \frac{34}{65} \quad
+    \frac{1}{13} \quad
+    \frac{1}{17} \quad
+    \frac{10}{3} \quad
+    \frac{7}{1}
+    \]
+    
+    We start from the value $n=6=2^1 3^1$. At each step, we find the first fraction $f=\frac{p}{q}$ such that $q$ divides $n$ (i.e., such that $n \cdot f$ is an integer), and then replace $n$ by $n \cdot f$. If there is no such $f$, the program halts.
+    
+    For this example, the sequence of values produced will include the infinite subsequence $2^1 3^1$, $2^1 3^2$, $2^3 3^5$, $2^5 3^8$, $2^8 3^{13}$, $\ldots$.
+    Whenever $n$ is only divisible by $2$ and $3$, the exponents will be adjacent Fibonacci numbers.
+    
+    Prove why this program outputs the Fibonacci numbers in this way, or instead find your own program that outputs Fibonacci numbers and prove it works.
+    
+    \textbf{Hint:} you can view this computation as a special type of counter machine.
+    See section 7.6.2 in the text for more examples.
+
+\end{document}

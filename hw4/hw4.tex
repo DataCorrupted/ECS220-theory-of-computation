@@ -1,0 +1,33 @@
+\documentclass[11pt]{article}
+
+%\usepackage[nosol]{optional}
+\usepackage[sol]{optional}
+\usepackage{xsim}
+\opt{sol}{\xsimsetup{solution/print = true}}
+\opt{nosol}{\xsimsetup{solution/print = false}}
+\xsimsetup{exercise/the-counter = \alph{exercise}.}
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathsf{P}}
+\newcommand{\NP}{\mathsf{NP}}
+\newcommand{\SAT}{\textsc{Sat}}
+
+\usepackage{enumerate,color,comment}
+\usepackage{graphicx}
+
+\usepackage{fullpage,amsmath,amssymb}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref} % for href links, and also makes \ref and \eqref clickable in the PDF
+
+
+\usepackage{fancyhdr}
+\fancypagestyle{firststyle}
+{
+   \fancyhf{}
+   \fancyhead[C]{Copyright \copyright\ \today, David Doty}
+}
+
+
+\title{Homework 4 \opt{sol}{Solutions} -- ECS 220, Winter 2020}
+\date{}
