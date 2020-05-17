@@ -5,6 +5,13 @@
 \thispagestyle{firststyle}
 \vspace{-2.0cm}
 
+\newcommand{\II}{\#2}
+\newcommand{\III}{\#3}
+\newcommand{\V}{\#5}
+\newcommand{\VII}{\#7}
+\newcommand{\XI}{\#11}
+\newcommand{\XII}{\#13}
+\newcommand{\XVII}{\#17}
 
 \section{Programming with Fractions}
     The late John Conway invented the following programming language that is defined by a finite sequence of fractions.
@@ -37,19 +44,30 @@
 \section*{Solution}
 
 We shall setch this model to a counter machine. 
-In this machine, we proved that given input of the form $2^s3^t$, the output put has to be in the same form thanks to the predicates in the machine.
+In this machine we use 7 counter to represent the number of each primes(i.e. $2, 3, 5, 7, 11, 13, 17$) that can be decomposed from each step.
+In the following proof, we would use notation $\#x$ to refer to the counter that is counting the number of $x$.
+Then the step of switching from $n$ to $n\cdot f$ would become increase counters that are in $p$ and decrease the counters that are in $q$.
 
-Notice the asserts and branches in the graph that guarantees that at accepting state the number of $5, 7, 11, 13, 17$'s  are all zero.
+In this machine, we add the conditions and assertions to each edge.
+In this way, we showed that given input of the form $2^s3^t$, the output put has to be in the same form.
+Notice the asserts and branches in the graph that guarantees that at accepting state $\V = \VII = \XI = \XII = \XVII = 0$.
 
 Not let's proof that this machine actually generates a Fib sequence.
-We shall prove by reduction.
+Since we already known that the initial case is $s = 1, t = 1$, all we need to proof is that, given input $2^s3^t$, the output would be $2^t3^{s+t}$
+
+\begin{theorem}
+    Given input $2^s3^t$, $s < t$, the output would be $2^t3^{s+t}$
+\end{theorem}
 
 \begin{proof}
-    Case $s = 1, t =  1$, it is shown in the example(also in the counter machine we showed) that 
-    
-    Other cases: suppose that we have proved that $ s' < s, t' < t$ input $2^{s'}3^{t'}$ would output $2^{t'}3^{s' + t'}$
-        
 
+    We shall walk through the machine to proof that.
+    \begin{enumerate}
+        \item Initial input has counter value $\II = s, \III = t$, all other counters are zero.
+        \item We would be looping at state $\frac{10}{3}$ until we have $\V = t, \II = s + t, \III = 0$, i.e. there is no $3$ left. 
+        \item At state $\frac{7}{1}$, since $q = 1$, it is always executed once and leave us $\XII = 1$, everything else unchanged.
+        \item TODO
+    \end{enumerate}
 \end{proof}
 
 
