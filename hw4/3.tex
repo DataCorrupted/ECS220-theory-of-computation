@@ -69,6 +69,46 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
         \item TODO
     \end{enumerate}
 \end{proof}
+ \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto, semithick,
+        el/.style = {inner sep=7pt, align=left, sloped}] 
+        %\tikzstyle{every node} = [circle, draw]
+        \node [state, scale=2,el,label={[blue,align=left]above:$\#2++$\\$\#3--$}] (2) {$\frac{10}{3}$};
+        \node [state, initial above,accepting, scale=2,position=40:1 cm from 2,] (1) {$2^s 3^t$};
+        \node [state, scale=2, position=200: 2cm from 2,el,label={[blue,align=left]above:$\#7++$}] (3) {$\frac{7}{1}$};
+        \node [state, scale=2, position=-20: 2cm from 2,el,label={[blue,align=left]right:$\#13--$}] (4) {$\frac{1}{13}$};
+        \node [state, scale=2, below of=3,el,label={[blue,align=left]left:$\#3++$\\$\#11++$\\ $\#2--$\\$\#7--$}] (5) {$\frac{33}{14}$};
+        \node [state, scale=2, position=0:0.9cm from 5,el,label={[blue,align=left]above:$\#3++$\\$\#7++$\\ $\#2--$\\$\#11--$}] (6) {$\frac{21}{22}$};
+        \node [state, scale=2, right of=6,el,label={[blue,align=left]right:$\#17--$}] (7) {$\frac{1}{17}$};
+        \node [state, scale=2, below of=5,el,label={[blue,align=left]left:$\#13++$\\$\#11--$}] (8) {$\frac{13}{11}$};
+        \node [state, scale=2, position=0:0.9cm from 8,el,label={[blue,align=left]left:$\#13++$\\$\#7--$}] (9) {$\frac{13}{7}$};
+        \node [state, scale=2, below right of=9,el,label={[blue,align=left]below:$\#2++$\\$\#17++$\\ $\#5--$\\$\#13--$}] (11) {$\frac{34}{65}$};
+        \node [state, scale=2, position=0: 2.6cm from 9,el,label={[blue,align=left]right:$\#2++$\\$\#13++$\\ $\#5--$\\$\#17--$}] (10) {$\frac{26}{85}$};
+        
+       
+    \path[->]
+        (1)  edge[cfgedge, bend right=10] (2)
+        (2)  edge[cfgedge, bend right=10] node[el,above] {$\#3=0$} (3)
+        (2)  edge[in=240, out=-60,loop] node[el,above] {$\#3\ne0$} (2)
+        (3)  edge[cfgedge] node [el,below] {$\#7=1$} (5)
+        (5)  edge[cfgedge,bend left=20] node [el,above] {$\#2\ne0$} (6) 
+        (6)  edge[cfgedge,bend left=20] node [el,below] {$\#2\ne0$} (5)
+    %    (5)  edge[in=150, out=210,loop] node[el,above] {$\#2\ne0$ \\ $\#7\ne0$} (5)
+        (5)  edge[cfgedge] node [el,below] {$\#2=0$ \\ $\#7=0$} (8)
+        (6)  edge[cfgedge] node [el,above] {$\#2=0$ \\ $\#7=1$} (9)
+        (8)  edge[cfgedge,bend right=30] node [el,above] {$\#13=1$} (11)
+        (9)  edge[cfgedge,bend right=10] node [el,above] {$\#13=1$} (11)
+        (11)  edge[cfgedge,bend right=20] node [el,below] {$\#5\ne0$} (10)
+        (10)  edge[cfgedge,bend right=20] node [el,below] {$\#5\ne0$} (11)
+        (11)  edge[cfgedge] node [el,below] {$\#5=0$} (7)
+        (10)  edge[cfgedge] node [el,below] {$\#5=0$} (4)
+        (7)  edge[cfgedge]  (1)
+        (4)  edge[cfgedge]  (1);
+        \end{tikzpicture}
+        \caption{Directed graph $G$}
+        \label{fig:graph1}
+      \end{figure}
 
 
 \end{document}

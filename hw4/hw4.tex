@@ -12,6 +12,19 @@
 
 \usepackage{enumerate,color,comment}
 \usepackage{graphicx}
+\usepackage{tikz}
+    \usetikzlibrary{shapes,arrows,automata,positioning,cd}
+    \tikzset{
+      cfgedge/.style   = {black, ->, >=stealth},
+      forward/.style = { blue, ->, >=angle 45},
+      backward/.style = { red, densely dashed, ->, >=latex' },
+      backwardleft/.style = { red, densely dashed, <-, >=latex' },
+      position/.style args={#1:#2 from #3}{
+        at=(#3.#1), anchor=#1+180, shift=(#1:#2)
+    },
+    }
+    \usepackage{xcolor}
+\usetikzlibrary{automata, positioning}
 
 % For proof.
 \usepackage{amsmath,amsthm,amssymb}
