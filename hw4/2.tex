@@ -27,6 +27,42 @@
     then you could solve $\textsc{Halting}$.
 \end{quote}
 
+\begin{solution}
+\begin{enumerate}[(i)]
+    \item We show that HALTING$\leq$ (i)\\
+    For the given arbitrary instance $(P, x)$, we build $Q_{P,x}$ like below:
+    \begin{lstlisting}[language=python]
+    def Q_Px(y):
+        if y==0:
+           P(x)
+        else:
+           return
+    \end{lstlisting}
+    We can see that for any input 0, the program $Q$ will run the problem $P(x)$, the instance of the Halting problem.\\
+    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$ halts.
+    \item We show that HALTING$\leq$ (ii)\\
+    For the given arbitrary instance $(P, x)$, we build $Q_{P,x}$ like below:
+    \begin{lstlisting}[language=python]
+    def Q_Px(y):
+        P(x)
+        
+    \end{lstlisting}
+    We can see that for any input $y$, the program $Q$ will run the problem $P(x)$, the instance of the Halting problem.\\
+    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$ halts.
+    \item We show that HALTING$\leq$ (iii)\\
+    For the given arbitrary instance $(P, x)$, we build $Q_{P,x}$ like below:
+    \begin{lstlisting}[language=python]
+    def Q_Px(y):
+        if HALTS(P,x):
+           return True
+        return False
+    \end{lstlisting}
+    We can see that $Q(y)=$ {\tt true} for all $y$ if and only if happens when the instance $P(x)$ halts.\\
+    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$.
+
+\end{enumerate}
+
+\end{solution}
 
 
 \end{document}
