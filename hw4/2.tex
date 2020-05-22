@@ -27,7 +27,8 @@
     then you could solve $\textsc{Halting}$.
 \end{quote}
 
-\begin{solution}
+\section*{Solution}
+
 \begin{enumerate}[(i)]
     \item We show that HALTING$\leq$ (i)\\
     For the given arbitrary instance $(P, x)$, we build $Q_{P,x}$ like below:
@@ -59,10 +60,6 @@
     \end{lstlisting}
     We can see that $Q(y)=$ {\tt true} for all $y$ if and only if happens when the instance $P(x)$ halts.\\
     So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$.
-
 \end{enumerate}
-
-\end{solution}
-
 
 \end{document}

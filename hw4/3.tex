@@ -10,7 +10,7 @@
 \newcommand{\V}{\#5}
 \newcommand{\VII}{\#7}
 \newcommand{\XI}{\#11}
-\newcommand{\XII}{\#13}
+\newcommand{\XIII}{\#13}
 \newcommand{\XVII}{\#17}
 
 \section{Programming with Fractions}
@@ -50,7 +50,7 @@ Then the step of switching from $n$ to $n\cdot f$ would become increase counters
 
 In this machine, we add the conditions and assertions to each edge.
 In this way, we showed that given input of the form $2^s3^t$, the output put has to be in the same form.
-Notice the asserts and branches in the graph that guarantees that at accepting state $\V = \VII = \XI = \XII = \XVII = 0$.
+Notice the asserts and branches in the graph that guarantees that at accepting state $\V = \VII = \XI = \XIII = \XVII = 0$.
 
 Not let's proof that this machine actually generates a Fib sequence.
 Since we already known that the initial case is $s = 1, t = 1$, all we need to proof is that, given input $2^s3^t$, the output would be $2^t3^{s+t}$
@@ -65,16 +65,17 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
     \begin{enumerate}
         \item Initial input has counter value $\II = s, \III = t$, all other counters are zero.
         \item We would be looping at state $\frac{10}{3}$ until we have $\V = t, \II = s + t, \III = 0$, i.e. there is no $3$ left. 
-        \item At state $\frac{7}{1}$, since $q = 1$, it is always executed once and leave us $\XII = 1$, everything else unchanged.
+        \item At state $\frac{7}{1}$, since $q = 1$, it is always executed once and leave us $\XIII = 1$, everything else unchanged.
         \item TODO
     \end{enumerate}
 \end{proof}
  \begin{figure}[h]
         \centering
+        \resizebox{\textwidth}{!}{%
         \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto, semithick,
         el/.style = {inner sep=7pt, align=left, sloped}] 
         %\tikzstyle{every node} = [circle, draw]
-        \node [state, scale=2,el,label={[blue,align=left]above:$\#2++$\\$\#3--$}] (2) {$\frac{10}{3}$};
+        \node [state, scale=2,el,label={[blue,align=left]above:$\#2++$\\$\#3--$\\$\V++$}] (2) {$\frac{10}{3}$};
         \node [state, initial above,accepting, scale=2,position=40:1 cm from 2,] (1) {$2^s 3^t$};
         \node [state, scale=2, position=200: 2cm from 2,el,label={[blue,align=left]above:$\#7++$}] (3) {$\frac{7}{1}$};
         \node [state, scale=2, position=-20: 2cm from 2,el,label={[blue,align=left]right:$\#13--$}] (4) {$\frac{1}{13}$};
@@ -88,24 +89,25 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
         
        
     \path[->]
-        (1)  edge[cfgedge, bend right=10] (2)
-        (2)  edge[cfgedge, bend right=10] node[el,above] {$\#3=0$} (3)
+        (1)  edge[cfgedge, bend right=10] node[el,below] {$\#2=s$ \\ $\#3=t$} (2)
+        (2)  edge[cfgedge, bend right=10] node[el,above] {$\#2 = s+t$ \\ $\#3=0$ \\ $\V = t$} (3)
         (2)  edge[in=240, out=-60,loop] node[el,above] {$\#3\ne0$} (2)
         (3)  edge[cfgedge] node [el,below] {$\#7=1$} (5)
         (5)  edge[cfgedge,bend left=20] node [el,above] {$\#2\ne0$} (6) 
         (6)  edge[cfgedge,bend left=20] node [el,below] {$\#2\ne0$} (5)
     %    (5)  edge[in=150, out=210,loop] node[el,above] {$\#2\ne0$ \\ $\#7\ne0$} (5)
-        (5)  edge[cfgedge] node [el,below] {$\#2=0$ \\ $\#7=0$} (8)
-        (6)  edge[cfgedge] node [el,above] {$\#2=0$ \\ $\#7=1$} (9)
+        (5)  edge[cfgedge] node [el,below] {$\#2=0$ \\ $\#7=0$ \\ $\XI = 1$} (8)
+        (6)  edge[cfgedge] node [el,above] {$\#2=0$ \\ $\#7=1$ \\ $\XI = 0$} (9)
         (8)  edge[cfgedge,bend right=30] node [el,above] {$\#13=1$} (11)
         (9)  edge[cfgedge,bend right=10] node [el,above] {$\#13=1$} (11)
         (11)  edge[cfgedge,bend right=20] node [el,below] {$\#5\ne0$} (10)
         (10)  edge[cfgedge,bend right=20] node [el,below] {$\#5\ne0$} (11)
-        (11)  edge[cfgedge] node [el,below] {$\#5=0$} (7)
-        (10)  edge[cfgedge] node [el,below] {$\#5=0$} (4)
-        (7)  edge[cfgedge]  (1)
-        (4)  edge[cfgedge]  (1);
+        (11)  edge[cfgedge] node [el,below] {$\#5=0$ \\ $\II = t$ \\ $\XIII = 0$ \\ $\XVII = 1$} (7)
+        (10)  edge[cfgedge] node [el,below] {$\#5=0$ \\ $\II = t$ \\ $\XIII = 1$ \\ $\XVII = 0$} (4)
+        (7)  edge[cfgedge] node [el, below] {$\#17=0$} (1)
+        (4)  edge[cfgedge] node [el, below] {$\#13=0$} (1);
         \end{tikzpicture}
+        }%
         \caption{Directed graph $G$}
         \label{fig:graph1}
       \end{figure}
