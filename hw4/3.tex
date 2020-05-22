@@ -83,13 +83,13 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
         \node [state, initial above,accepting, scale=2,position=40:1 cm from 2,] (1) {$2^s 3^t$};
         \node [state, scale=2, position=200: 2cm from 2,el,label={[blue,align=left]above:$\#7++$}] (3) {$\frac{7}{1}$};
         \node [state, scale=2, position=-20: 2cm from 2,el,label={[blue,align=left]right:$\#13--$}] (4) {$\frac{1}{13}$};
-        \node [state, scale=2, below of=3,el,label={[blue,align=left]left:$\#3++$\\$\#11++$\\ $\#2--$\\$\#7--$}] (5) {$\frac{33}{14}$};
-        \node [state, scale=2, position=0:0.9cm from 5,el,label={[blue,align=left]above:$\#3++$\\$\#7++$\\ $\#2--$\\$\#11--$}] (6) {$\frac{21}{22}$};
+        \node [state, scale=2, below of=3,el,label={[blue,align=left]left:$\#2--$\\$\#3++$\\ $\#7--$\\$\#11++$}] (5) {$\frac{33}{14}$};
+        \node [state, scale=2, position=0:0.9cm from 5,el,label={[blue,align=left]above:$\#2--$\\$\#3++$\\ $\#7++$\\$\#11--$}] (6) {$\frac{21}{22}$};
         \node [state, scale=2, right of=6,el,label={[blue,align=left]right:$\#17--$}] (7) {$\frac{1}{17}$};
-        \node [state, scale=2, below of=5,el,label={[blue,align=left]left:$\#13++$\\$\#11--$}] (8) {$\frac{13}{11}$};
-        \node [state, scale=2, position=0:0.9cm from 8,el,label={[blue,align=left]left:$\#13++$\\$\#7--$}] (9) {$\frac{13}{7}$};
-        \node [state, scale=2, below right of=9,el,label={[blue,align=left]below:$\#2++$\\$\#17++$\\ $\#5--$\\$\#13--$}] (11) {$\frac{34}{65}$};
-        \node [state, scale=2, position=0: 2.6cm from 9,el,label={[blue,align=left]right:$\#2++$\\$\#13++$\\ $\#5--$\\$\#17--$}] (10) {$\frac{26}{85}$};
+        \node [state, scale=2, below of=5,el,label={[blue,align=left]left:$\#11--$\\$\#13++$}] (8) {$\frac{13}{11}$};
+        \node [state, scale=2, position=0:0.9cm from 8,el,label={[blue,align=left]left:$\#7--$\\$\#13++$}] (9) {$\frac{13}{7}$};
+        \node [state, scale=2, below right of=9,el,label={[blue,align=left]below:$\#2++$\\$\#5--$\\ $\#13--$\\$\#17++$}] (11) {$\frac{34}{65}$};
+        \node [state, scale=2, position=0: 2.6cm from 9,el,label={[blue,align=left]right:$\#2++$\\$\#5--$\\ $\#13++$\\$\#17--$}] (10) {$\frac{26}{85}$};
         
        
     \path[->]
