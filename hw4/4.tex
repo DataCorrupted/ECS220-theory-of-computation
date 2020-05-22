@@ -34,12 +34,12 @@ We shall give a highly abstracted algorithm in programming language Rust:
 fn verify_rect(env: Environment) -> bool {
     // Initial state: in the middle of nowhere, 
     // keep going to north to find the first wall.
-    while (!env.wall_on_north()) {
+    while !env.wall_on_north() {
         env.step_north();
     }
 
     // We have find the north wall, goes to north east corner.
-    while (!env.wall_on_east()) {
+    while !env.wall_on_east() {
         env.step_east();
 
         // If suddenly the north side has no wall, then the north wall is  
@@ -51,49 +51,49 @@ fn verify_rect(env: Environment) -> bool {
         // x.........x
         // xxxxxxxxxxx
         //
-        if (!env.wall_on_north()) {
+        if !env.wall_on_north() {
             return false;
         }
     }
 
     // We are in the north east corner, go south.
-    while (!env.wall_on_south()) {
+    while !env.wall_on_south() {
         env.step_south();
 
         // The east wall is not straight.
-        if (!env.wall_on_east()) {
+        if !env.wall_on_east() {
             return false;
         }
     }
 
     // We are in the south east corner, go west.
-    while (!env.wall_on_west()) {
+    while !env.wall_on_west() {
         env.step_west();
 
         // The south wall is not straight.
-        if (!env.wall_on_south()) {
+        if !env.wall_on_south() {
             return false;
         }
     }
 
     // We are in the south west corner, go north.
-    while (!env.wall_on_north()) {
+    while !env.wall_on_north() {
         env.step_north();
 
         // The west wall is not straight.
-        if (!env.wall_on_west()) {
+        if !env.wall_on_west() {
             return false;
         }
     }
 
     // We are in the north west corner, go east.
     let mut length = 0;
-    while (!env.wall_on_east()) {
+    while !env.wall_on_east() {
         env.step_east();
         length += 1;
 
         // The north wall is not straight.
-        if (!env.wall_on_north()) {
+        if !env.wall_on_north() {
             return false;
         }
     }
@@ -137,7 +137,8 @@ fn verify_rect(env: Environment) -> bool {
 \begin{proof}
     Since this is a finite region as mentioned. 
     Then each loop must finish in a finite step, thus this function is guaranteed to return.
-    The time complexity would be $O(m)$ where $m$ is the diameter of this region.
+    The time complexity for parameter would be $O(m)$ where $m$ is the diameter of this region.
+    The compilexity for inside would be $O(m^2)$ and the overall complexity is $O(m^2)$
 \end{proof}
 
 \end{document}
