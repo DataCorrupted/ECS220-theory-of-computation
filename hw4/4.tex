@@ -87,8 +87,10 @@ fn verify_rect(env: Environment) -> bool {
     }
 
     // We are in the north west corner, go east.
+    let mut length = 0;
     while (!env.wall_on_east()) {
         env.step_east();
+        length += 1;
 
         // The north wall is not straight.
         if (!env.wall_on_north()) {
@@ -96,6 +98,34 @@ fn verify_rect(env: Environment) -> bool {
         }
     }
 
+    // Now that we know we are in a rectangle space, 
+    // we have to vet that the space inside is all empty.
+    let mut direction = Direction::Left;
+    while !(env.wall_on_south() && (env.wall_on_east() || env.wall_on_west())) {
+        env.step_south();
+        let mut len = 1;
+        match direction {
+            Direction::Left => {
+                while !env.wall_on_west() {
+                    env.step_west();
+                    len += 1;
+                }
+                direction = Direction::Right;
+            }
+            Direction::Right => {
+                while !env.wall_on_east() {
+                    env.step_east();
+                    len += 1;
+                }
+                direction = Direction::Left;
+            }
+        }
+        // The length is differnt than the first line means
+        // that there is something blocking inside.
+        if len != length {
+            return false;
+        }
+    }
     true
 }
 \end{lstlisting}
