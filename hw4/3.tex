@@ -65,8 +65,12 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
     \begin{enumerate}
         \item Initial input has counter value $\II = s, \III = t$, all other counters are zero.
         \item We would be looping at state $\frac{10}{3}$ until we have $\V = t, \II = s + t, \III = 0$, i.e. there is no $3$ left. 
-        \item At state $\frac{7}{1}$, since $q = 1$, it is always executed once and leave us $\XIII = 1$, everything else unchanged.
-        \item TODO
+        \item At state $\frac{7}{1}$, since $q = 1$, it is always executed once and leave us $\VII = 1$, everything else unchanged.
+        \item Then we would be looping between state $\frac{33}{14}$ and state $\frac{21}{22}$. These two states aim to wipe out all the $2$. If $\II$ becomes zero at state $\frac{33}{14}$, then it comes to state $\frac{13}{11}$ with $\XI = 1, \III = s + t$; If $\II$ becomes zero at state $\frac{21}{22}$, then it comes to state $\frac{13}{7}$ with $\VII = 1, \III = s + t$.
+        \item Either state $\frac{13}{11}$ or state $\frac{13}{7}$ will only executed once and leave us $\XIII = 1, \III = s + t$. 
+        \item Then we would be looping between state $\frac{34}{65}$ and state $\frac{26}{85}$. These two states aim to wipe out all the $5$. If $\V$ becomes zero at state $\frac{34}{65}$, then it comes to state $\frac{1}{17}$ with $\XVII = 1, \II = t, \III = s + t$; If $\V$ becomes zero at state $\frac{26}{85}$, then it comes to state $\frac{1}{13}$ with $\XIII = 1, \II = t, \III = s + t$;
+        \item Either state $\frac{1}{17}$ or state $\frac{1}{13}$ will only executed once and leave us $\II = t, \III = s + t$. 
+        \item Finally it returns to the accepting state $2^t3^{s+t}$ with $\II = t, \III = s + t$. 
     \end{enumerate}
 \end{proof}
  \begin{figure}[h]
