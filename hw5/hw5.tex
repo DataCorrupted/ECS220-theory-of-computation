@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+
+%\usepackage[nosol]{optional}
+\usepackage[sol]{optional}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    language=Python,
+    keepspaces=true,
+    numbers=left,
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    basicstyle=\ttfamily,
+    otherkeywords={self,True,False,yield},
+    keywordstyle=\ttfamily\color{blue!90!black},
+    %basicstyle=\footnotesize,
+    keywords=[3]{ttk},
+    keywordstyle={[2]\ttfamily\color{orange!80!orange}},
+    keywordstyle={[3]\ttfamily\color{red!80!orange}},
+    emph={MyClass,__init__},
+    emphstyle=\ttfamily\color{red!80!black},
+    stringstyle=\color{green!80!black},
+    showstringspaces=false
+}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{comment}
+
+\renewcommand{\topfraction}{.9}
+\renewcommand{\textfraction}{.1}
+
+\usepackage{fullpage,amsmath,amssymb}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref} % for href links, and also makes \ref and \eqref clickable in the PDF
+
+% parenthetical comment to state verbally but not write on the board
+\newcommand{\com}[1]{\footnote{#1}}
+
+\newcommand{\deltahat}{\widehat{\delta}}
+
+\newcommand{\QuasiP}{\mathsf{QuasiP}}
+
+\newcommand{\TIME}{\mathsf{TIME}}
+
+\usepackage{fancyhdr}
+\fancypagestyle{firststyle}
+{
+    \fancyhf{}
+    \fancyhead[C]{Copyright \copyright\ \today, David Doty}
+}
+
+
+\title{Homework 5 \opt{sol}{Solutions} -- ECS 220, Winter 2020}
+\date{}

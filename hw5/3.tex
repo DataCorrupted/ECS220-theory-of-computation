@@ -1,0 +1,26 @@
+\input{hw5.tex}
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+\vspace{-2.0cm}
+
+\section{Alphabetic Geography. (Textbook problem 8.20)}
+\begin{quote}
+    In traditional Geography, a move from a city $u$ to a city $v$ is allowed if $v$ starts with the same letter that $u$ ends with.
+    Let’s say that a directed graph $G$ is \emph{alphabetic} if it of this form:
+    in other words, if for some finite alphabet $A$,
+    each vertex $u$ can be assigned a pair $f(u)$, $\ell(u) \in A$
+    such that there is an edge from $u$ to $v$
+    if and only if $\ell(u) = f(v)$.
+    Give a small example of a graph that is not alphabetic.
+    Then show that \textsc{Alphabetic-Geography} is $\mathsf{PSPACE}$-complete,
+    by converting any graph to an alphabetic one
+    (albeit with an alphabet that grows with the number of vertices).
+\end{quote}
+The last sentence is asking for a \emph{reduction} from $\textsc{Geography}$ to $\textsc{Alphabetic-Geography}$:
+convert any graph $G$ into an alphabetic graph $G_\alpha$ such that
+Player 1 has a winning strategy on $G$
+if and only if
+Player 1 has a winning strategy on $G_\alpha$.
+
+\end{document}

@@ -1,0 +1,25 @@
+\input{hw5.tex}
+\begin{document}
+\maketitle
+\thispagestyle{firststyle}
+\vspace{-2.0cm}
+
+
+\section{Matched parentheses}
+Suppose we are given a string of parentheses.
+First show that telling whether they are properly matched and nested,
+such as $(()())$ or $((()))()$ but not $())$ or $())(()$,
+is in $\mathsf{L}$.
+
+Now suppose there are two types of parentheses, round ones and square brackets.
+We wish to know if they are properly nested: for instance,
+$([])[]$ and $[()[]]$ are allowed,
+but $([)]$ is not.
+Show that this problem is in $\mathsf{L}$.
+
+    {\bf Hint:} Each opening parentheses ( or [ has a ``closing partner'' ) or ].
+Ensure that the type of each opening is the same as the type of its closing partner.
+
+
+
+\end{document}
