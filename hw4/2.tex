@@ -40,7 +40,7 @@
            return
     \end{lstlisting}
     We can see that for any input 0, the program $Q$ will run the problem $P(x)$, the instance of the Halting problem.\\
-    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$ halts.
+    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$ halts on input 0.
     \item We show that HALTING$\leq$ (ii)\\
     For the given arbitrary instance $(P, x)$, we build $Q_{P,x}$ like below:
     \begin{lstlisting}[language=python]
@@ -49,17 +49,54 @@
         
     \end{lstlisting}
     We can see that for any input $y$, the program $Q$ will run the problem $P(x)$, the instance of the Halting problem.\\
-    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$ halts.
+    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$ halts for all $y$.
     \item We show that HALTING$\leq$ (iii)\\
     For the given arbitrary instance $(P, x)$, we build $Q_{P,x}$ like below:
     \begin{lstlisting}[language=python]
     def Q_Px(y):
-        if HALTS(P,x):
+        if P(x):
            return True
         return False
     \end{lstlisting}
     We can see that $Q(y)=$ {\tt true} for all $y$ if and only if happens when the instance $P(x)$ halts.\\
-    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)$.
+    So we can get that: $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)=true$ for all $y$.
+    \item We show that HALTING$\leq$ (iv)\\
+    Unlike the above three proof, this time we need to modify $P(x)$:
+    \begin{lstlisting}[language=python]
+    def P(x):
+        ... (remain unchanged)
+        for every i as second/step/configuration:
+            Q_Px(i); 
+        ... (remain unchanged)
+    def Q_Px(i):
+        return
+    \end{lstlisting}
+    So we can see that if $P(x)$ halts, its runninfg time/steps are finite, which makes the input subset of $Q_{P,x}$ finite. Otherwise, if if $P(x)$ never halts, there will be infinite inputs of $Q_{P,x}$.\\
+    So we can get $P(x)$ halts $\Leftrightarrow$ The set of $y$ on which $Q_{P,x}(y)$ halts is finite.
+    \item We show that HALTING$\leq$ (v)\\
+    For the given arbitrary instance $(P, x)$, we build $Q_{P,x}$ like below:
+    \begin{lstlisting}[language=python]
+    def Q_Px(y):
+        if P(x):
+           return y
+    \end{lstlisting}
+    So it is obvious that $P(x)$ halts $\Leftrightarrow$ $Q_{P,x}(y)=y$ exists.
+    \item We create a function which checks if two program are equivalent or not:
+    \begin{lstlisting}[language=python]
+    def check(P,Q):
+        if Halts(P(x)) and Halts(Q(x)):
+            if P(x)==Q(x):
+                return True
+            else:
+                return False
+        if Halts(P(x)) and !Halts(Q(x)):
+            return False
+        if !Halts(P(x)) and Halts(Q(x)):
+            return False
+        if !Halts(P(x)) and !Halts(Q(x)):
+            return True
+    \end{lstlisting}
+    It is obvious that $check(P,Q)$ is decidable $\Leftrightarrow$ Halting(Halts()) is decidable. So that if we could solve this check equivalence problem, then we could solve $\textsc{Halting}$.
 \end{enumerate}
 
 \end{document}

@@ -62,18 +62,8 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
 \begin{proof}
 
     We shall walk through the machine to proof that.
-    \begin{enumerate}
-        \item Initial input has counter value $\II = s, \III = t$, all other counters are zero.
-        \item We would be looping at state $\frac{10}{3}$ until we have $\V = t, \II = s + t, \III = 0$, i.e. there is no $3$ left. 
-        \item At state $\frac{7}{1}$, since $q = 1$, it is always executed once and leave us $\VII = 1$, everything else unchanged.
-        \item Then we would be looping between state $\frac{33}{14}$ and state $\frac{21}{22}$. These two states aim to wipe out all the $2$. If $\II$ becomes zero at state $\frac{33}{14}$, then it comes to state $\frac{13}{11}$ with $\XI = 1, \III = s + t$; If $\II$ becomes zero at state $\frac{21}{22}$, then it comes to state $\frac{13}{7}$ with $\VII = 1, \III = s + t$.
-        \item Either state $\frac{13}{11}$ or state $\frac{13}{7}$ will only executed once and leave us $\XIII = 1, \III = s + t$. 
-        \item Then we would be looping between state $\frac{34}{65}$ and state $\frac{26}{85}$. These two states aim to wipe out all the $5$. If $\V$ becomes zero at state $\frac{34}{65}$, then it comes to state $\frac{1}{17}$ with $\XVII = 1, \II = t, \III = s + t$; If $\V$ becomes zero at state $\frac{26}{85}$, then it comes to state $\frac{1}{13}$ with $\XIII = 1, \II = t, \III = s + t$;
-        \item Either state $\frac{1}{17}$ or state $\frac{1}{13}$ will only executed once and leave us $\II = t, \III = s + t$. 
-        \item Finally it returns to the accepting state $2^t3^{s+t}$ with $\II = t, \III = s + t$. 
-    \end{enumerate}
-\end{proof}
- \begin{figure}[h]
+    \clearpage
+    \begin{figure}[h]
         \centering
         \resizebox{\textwidth}{!}{%
         \begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto, semithick,
@@ -83,13 +73,13 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
         \node [state, initial above,accepting, scale=2,position=40:1 cm from 2,] (1) {$2^s 3^t$};
         \node [state, scale=2, position=200: 2cm from 2,el,label={[blue,align=left]above:$\#7++$}] (3) {$\frac{7}{1}$};
         \node [state, scale=2, position=-20: 2cm from 2,el,label={[blue,align=left]right:$\#13--$}] (4) {$\frac{1}{13}$};
-        \node [state, scale=2, below of=3,el,label={[blue,align=left]left:$\#3++$\\$\#11++$\\ $\#2--$\\$\#7--$}] (5) {$\frac{33}{14}$};
-        \node [state, scale=2, position=0:0.9cm from 5,el,label={[blue,align=left]above:$\#3++$\\$\#7++$\\ $\#2--$\\$\#11--$}] (6) {$\frac{21}{22}$};
+        \node [state, scale=2, below of=3,el,label={[blue,align=left]left:$\#2--$\\$\#3++$\\ $\#7--$\\$\#11++$}] (5) {$\frac{33}{14}$};
+        \node [state, scale=2, position=0:0.9cm from 5,el,label={[blue,align=left]above:$\#2--$\\$\#3++$\\ $\#7++$\\$\#11--$}] (6) {$\frac{21}{22}$};
         \node [state, scale=2, right of=6,el,label={[blue,align=left]right:$\#17--$}] (7) {$\frac{1}{17}$};
-        \node [state, scale=2, below of=5,el,label={[blue,align=left]left:$\#13++$\\$\#11--$}] (8) {$\frac{13}{11}$};
-        \node [state, scale=2, position=0:0.9cm from 8,el,label={[blue,align=left]left:$\#13++$\\$\#7--$}] (9) {$\frac{13}{7}$};
-        \node [state, scale=2, below right of=9,el,label={[blue,align=left]below:$\#2++$\\$\#17++$\\ $\#5--$\\$\#13--$}] (11) {$\frac{34}{65}$};
-        \node [state, scale=2, position=0: 2.6cm from 9,el,label={[blue,align=left]right:$\#2++$\\$\#13++$\\ $\#5--$\\$\#17--$}] (10) {$\frac{26}{85}$};
+        \node [state, scale=2, below of=5,el,label={[blue,align=left]left:$\#11--$\\$\#13++$}] (8) {$\frac{13}{11}$};
+        \node [state, scale=2, position=0:0.9cm from 8,el,label={[blue,align=left]left:$\#7--$\\$\#13++$}] (9) {$\frac{13}{7}$};
+        \node [state, scale=2, below right of=9,el,label={[blue,align=left]below:$\#2++$\\$\#5--$\\ $\#13--$\\$\#17++$}] (11) {$\frac{34}{65}$};
+        \node [state, scale=2, position=0: 2.6cm from 9,el,label={[blue,align=left]right:$\#2++$\\$\#5--$\\ $\#13++$\\$\#17--$}] (10) {$\frac{26}{85}$};
         
        
     \path[->]
@@ -100,8 +90,8 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
         (5)  edge[cfgedge,bend left=20] node [el,above] {$\#2\ne0$} (6) 
         (6)  edge[cfgedge,bend left=20] node [el,below] {$\#2\ne0$} (5)
     %    (5)  edge[in=150, out=210,loop] node[el,above] {$\#2\ne0$ \\ $\#7\ne0$} (5)
-        (5)  edge[cfgedge] node [el,below] {$\#2=0$ \\ $\#7=0$ \\ $\XI = 1$} (8)
-        (6)  edge[cfgedge] node [el,above] {$\#2=0$ \\ $\#7=1$ \\ $\XI = 0$} (9)
+        (5)  edge[cfgedge] node [el,below] {$\#2=0$ \\ $\#3=s+t$ \\ $\#7=0$ \\ $\XI = 1$} (8)
+        (6)  edge[cfgedge] node [el,above] {$\#2=0$ \\ $\#3=s+t$ \\ $\#7=1$ \\ $\XI = 0$} (9)
         (8)  edge[cfgedge,bend right=30] node [el,above] {$\#13=1$} (11)
         (9)  edge[cfgedge,bend right=10] node [el,above] {$\#13=1$} (11)
         (11)  edge[cfgedge,bend right=20] node [el,below] {$\#5\ne0$} (10)
@@ -115,6 +105,18 @@ Since we already known that the initial case is $s = 1, t = 1$, all we need to p
         \caption{Directed graph $G$}
         \label{fig:graph1}
       \end{figure}
+      \clearpage
+    \begin{enumerate}
+        \item Initial input has counter value $\II = s, \III = t$, all other counters are zero.
+        \item We would be looping at state $\frac{10}{3}$ until we have $\V = t, \II = s + t, \III = 0$, i.e. there is no $3$ left. 
+        \item At state $\frac{7}{1}$, since $q = 1$, it is always executed once and leave us $\VII = 1$, everything else unchanged.
+        \item Then we would be looping between state $\frac{33}{14}$ and state $\frac{21}{22}$. These two states aim to wipe out all the $2$. If $\II$ becomes zero at state $\frac{33}{14}$, then it comes to state $\frac{13}{11}$ with $\XI = 1, \III = s + t$; If $\II$ becomes zero at state $\frac{21}{22}$, then it comes to state $\frac{13}{7}$ with $\VII = 1, \III = s + t$.
+        \item Either state $\frac{13}{11}$ or state $\frac{13}{7}$ will only executed once and leave us $\XIII = 1, \III = s + t$. 
+        \item Then we would be looping between state $\frac{34}{65}$ and state $\frac{26}{85}$. These two states aim to wipe out all the $5$. If $\V$ becomes zero at state $\frac{34}{65}$, then it comes to state $\frac{1}{17}$ with $\XVII = 1, \II = t, \III = s + t$; If $\V$ becomes zero at state $\frac{26}{85}$, then it comes to state $\frac{1}{13}$ with $\XIII = 1, \II = t, \III = s + t$;
+        \item Either state $\frac{1}{17}$ or state $\frac{1}{13}$ will only executed once and leave us $\II = t, \III = s + t$. 
+        \item Finally it returns to the accepting state $2^t3^{s+t}$ with $\II = t, \III = s + t$. 
+    \end{enumerate}
+\end{proof}
 
 
 \end{document}
