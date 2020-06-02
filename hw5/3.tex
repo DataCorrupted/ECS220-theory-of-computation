@@ -23,4 +23,28 @@ Player 1 has a winning strategy on $G$
 if and only if
 Player 1 has a winning strategy on $G_\alpha$.
 
+\section*{Solution}
+
+\subsection*{Non-alphabetic graph}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto, semithick]
+        \node [state] (a)               {a};
+        \node [state] (b) [right of=a]  {b};
+
+        \path[->]
+        (a) edge [loop above] node {1} ()
+        (a) edge [bend left] node {2} (b)
+        (b) edge [bend left] node {3} (a);
+    \end{tikzpicture}
+    \caption{A graph taht is not alphabetic}
+\end{figure}
+
+This graph is not alphabetic.
+As it clearly shows that $l(a) = f(a)$(edge 1), $l(a) = f(b)$(edge 2), $l(b) = f(a)$(edge 3).
+Therefore we have $l(b) = f(b)$, indicating that there should also be a self-loop over $b$, but there isn't.
+
+\subsection*{Proof of $\mathsf{PSPACE}$-complete}
+
 \end{document}
