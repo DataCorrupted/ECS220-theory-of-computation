@@ -5,7 +5,7 @@
 \vspace{-2.0cm}
 
 
-\section{Matched parentheses}
+\section*{Matched parentheses}
 Suppose we are given a string of parentheses.
 First show that telling whether they are properly matched and nested,
 such as $(()())$ or $((()))()$ but not $())$ or $())(()$,
@@ -21,5 +21,124 @@ Show that this problem is in $\mathsf{L}$.
 Ensure that the type of each opening is the same as the type of its closing partner.
 
 
+\section*{Solution}
+
+(Source code is listed \href{https://github.com/DataCorrupted/parentheses-matching}{here}.
+You will need \href{https://www.rust-lang.org/}{Rust programming language} to run it.
+Download it and \lstinline{cargo test} to run it.)
+
+\subsection*{Single parentheses}
+
+Solving this is relatively easy, all we need is a counter \lstinline{diff} to keep record of the difference between left parenthese $($ and right ones.
+If \lstinline{diff} is zero then the string happen to be matching.
+If smaller than zero then we have more right parenthese than left ones.
+
+It's easy to argue that this program is in $L$ as only one counter \lstinline{diff} is used and it will not exceed $n$, thus only uses $log n$ space.
+
+\begin{lstlisting}[language=Rust]
+/// Test if strings only consists of '(' and ')' matches.
+fn paren_matching<F>(s: &String, is_left: F) -> bool
+where
+    F: Fn(char) -> bool,
+{
+    let mut diff = 0;
+    for c in s.chars() {
+        if is_left(c) {
+            diff += 1;
+        } else {
+            diff -= 1;
+        }
+        if diff < 0 {
+            return false;
+        }
+    }
+    diff == 0
+}
+fn one_paren(c: char) -> bool {
+    c == '('
+}
+fn main() {
+    assert!(paren_matching(&"()()()".to_owned(), one_paren));
+    assert!(paren_matching(&"((()))".to_owned(), one_paren));
+    assert!(!paren_matching(&"())".to_owned(), one_paren));
+}
+\end{lstlisting}
+
+\subsection*{Two parentheses}
+
+We would start by verify if the string matches if we ignore the type of the parentheses, i.e. we replace $[$ with $($, $]$ with $)$.
+This first step eliminates some errors like $)($ or $()]$, i.e. left/right parenthese number mismatch and/or place mismatch.
+
+Now we only have to deal with the type, as we know it's a perfectly matches if we don't consider the parenthese type.
+We observe one important fact that, \textbf{for two matching parentheses, the number of bytes inside must be odd.}
+We would use this to determine if there is a mismatch, i.e. $([)]$ will be detected by this property.
+
+While finding matching right parenthese, we also (accidentally) made sure that the number of two type of the parenthese must also match.
+For example, if the number mismatch, $([]]$, first char $($ will not find it's matching right parenthese.
+
+The code will be listed below.
+
+\begin{lstlisting}[language=Rust]
+/// Finds the paren that matches the left paren.
+///
+/// If found, the index is returned, else None to indicate that
+/// there is no matching one for this char, which is a clear
+/// indicator that this string does not match.
+fn find_matching_paren(vec: &Vec<char>, idx: usize) -> Option<usize> {
+    let target = if vec[idx] == '(' { ')' } else { ']' };
+    let mut diff = 0;
+    for i in idx..vec.len() {
+        let curr = vec[i];
+        if curr == vec[idx] {
+            diff += 1;
+        } else if curr == target {
+            diff -= 1;
+        }
+        if diff < 0 {
+            return None;
+        }
+        if diff == 0 {
+            return Some(i);
+        }
+    }
+    None
+}
+
+fn two_parens(c: char) -> bool {
+    c == '(' || c == '['
+}
+
+/// Test if strings only consists of '(', ')', '[' and ']' matches.
+fn parens_matching(s: &String) -> bool {
+    if !paren_matching(s, two_parens) {
+        return false;
+    }
+    let vec: Vec<char> = s.chars().collect();
+    for i in 0..s.len() {
+        if !two_parens(vec[i]) {
+            continue;
+        }
+        if let Some(right_idx) = find_matching_paren(&vec, i) {
+            println!("{} matching paren {}", i, right_idx);
+            if (right_idx - i + 1) & 0x1 == 1 {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    true
+}
+
+fn main() {
+    assert!(parens_matching(&"([][])()".to_owned()));
+    assert!(!parens_matching(&"(()]()".to_owned()));
+    assert!(!parens_matching(&"([()()[()])]".to_owned()));
+}
+\end{lstlisting}
+
+It is also easy argue that this algorithm is in $L$, as there is only two counter involved:
+the index of current char, and the index of the char that matches current char.
+These two indexs both smaller than $n$, and thus takes $log n$ space.
 
 \end{document}
