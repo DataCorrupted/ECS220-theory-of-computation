@@ -23,9 +23,10 @@ Ensure that the type of each opening is the same as the type of its closing part
 
 \section*{Solution}
 
-(Source code is listed \href{https://github.com/DataCorrupted/parentheses-matching}{here}.
+(Source code is listed \href{https://github.com/DataCorrupted/parentheses-matching}{here}
+(The repo will be made public after this HW's submission ddl).
 You will need \href{https://www.rust-lang.org/}{Rust programming language} to run it.
-Download it and \lstinline{cargo test} to run it.)
+Install rust and \lstinline{cargo test} to test it.)
 
 \subsection*{Single parentheses}
 
@@ -58,9 +59,9 @@ fn one_paren(c: char) -> bool {
     c == '('
 }
 fn main() {
-    assert!(paren_matching(&"()()()".to_owned(), one_paren));
-    assert!(paren_matching(&"((()))".to_owned(), one_paren));
-    assert!(!paren_matching(&"())".to_owned(), one_paren));
+    assert!(paren_matching(&String::from("()()()", one_paren)));
+    assert!(paren_matching(&String::from("((()))", one_paren)));
+    assert!(!paren_matching(&String::from("())", one_paren)));
 }
 \end{lstlisting}
 
@@ -130,9 +131,9 @@ fn parens_matching(s: &String) -> bool {
 }
 
 fn main() {
-    assert!(parens_matching(&"([][])()".to_owned()));
-    assert!(!parens_matching(&"(()]()".to_owned()));
-    assert!(!parens_matching(&"([()()[()])]".to_owned()));
+    assert!(parens_matching(&String::from("([][])()")));
+    assert!(!parens_matching(&String::from("(()]()")));
+    assert!(!parens_matching(&String::from("([()()[()])]")));
 }
 \end{lstlisting}
 
