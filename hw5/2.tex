@@ -70,9 +70,9 @@ fn two_un_sat(Clause: clause) -> bool{
 \subsubsection*{Reduction}
 
 $\forall$ acyclic graph $G_a$, consider each of its edge a an implication, i.e. edge $x \rightarrow y$ is reduced to $\bar{x} \vee y$.
-Finally we would add a clause $\bar{t} \vee s$, which corresponds to edge $t \rightarrow s$, connect all clauses and we call it $\phi_G$.
+Finally we would add clause $()\bar{t} \vee s) \wedge (t \vee s) \wedge (\bar{t} \vee \bar{s})$, which corresponds to edge $t \rightarrow s$, connect all clauses and we call it $\phi_G$.
 
-Also, let denote $G_a'$ as the graph with an extra edge ($t \rightarrow s$), which is the implication graph of $\phi_G$.
+Also, let denote $G_a'$ as the implication graph of $\phi_G$, since we have $\bar{t} \vee s$, edge $t \rightarrow s$ is in $G$.
 
 \subsubsection*{Example}
 
@@ -94,19 +94,23 @@ The following graph shows an example of how to do the reduction.
 
 And this $G_a$ gets the following $\phi_G$:
 
-$$ (\bar{s} \vee a) \wedge (\bar{a} \vee t) \wedge (\bar{t} \vee s) $$
+$$ (\bar{s} \vee a) \wedge (\bar{a} \vee t) \wedge (\bar{t} \vee s) \wedge (t \vee s) \wedge (\bar{t} \vee \bar{s})$$
 
 \begin{figure}[h]
     \centering
     \begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto, semithick]
         \node [state] (a)                       {a};
         \node [state] (b) [below left of=a]     {s};
+        \node [state] (ns) [right of=c]     {$\bar{s}$};
         \node [state] (c) [below right of=a]    {t};
+        \node [state] (nt) [left of=b]     {$\bar{t}$};
 
         \path[->]
         (b) edge [bend left] node  {} (a)
         (a) edge [bend left] node  {} (c)
-        (c) edge [bend left] node  {} (b);
+        (c) edge [bend left] node  {} (b)
+        (c) edge [bend left] node  {} (ns)
+        (nt) edge [bend left] node  {} (b);
     \end{tikzpicture}
     \caption{$G_a'$: Implication graph of $\phi_G$}
 \end{figure}
@@ -128,9 +132,10 @@ Since we do all the change on the fly, i.e. we know what to do by simply look at
 
     Such path would be converted to:
 
-    $$(\bar{s} \vee c_1) \wedge (\bar{c_1} \vee c_2) \wedge \cdots \wedge (\bar{c_{k-1}} \vee c_k) \wedge (\bar{c_k} \vee t)$$
+    $$(\bar{s} \vee c_1) \wedge (\bar{c_1} \vee c_2) \wedge \cdots \wedge (\bar{c_{k-1}} \vee c_k) \wedge (\bar{c_k} \vee t) \wedge (t \vee s) \wedge (\bar{t} \vee \bar{s})$$
 
-    Since we also added $\bar{t} \vee s$, it's clear that $\phi_G$ cannot be satisfied, as this is a loop dependency.
+    Since we also added $\bar{t} \vee s$, it's clear that $\phi_G$ must have all the variables set to true or false.
+    But $s$ and $t$ cannot be the same, since $(t \vee s) \wedge (\bar{t} \vee \bar{s})$
 
     $\Leftarrow$
 
