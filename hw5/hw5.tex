@@ -4,8 +4,9 @@
 \usepackage[sol]{optional}
 
 \usepackage {tikz}
-    \usetikzlibrary{shapes,arrows,automata,positioning,cd}
+    \usetikzlibrary{calc,shapes,arrows,automata,positioning,cd}
     \tikzset{
+     dot node/.style={font=\sffamily\small},
       cfgedge/.style   = {black, ->, >=stealth},
       forward/.style = { blue, ->, >=angle 45},
       backward/.style = { red, densely dashed, ->, >=latex' },
